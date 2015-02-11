@@ -76,9 +76,16 @@ table img{
 .clearfix.panel-footer.employees{
 	background:rgb(18, 109, 167);
 }
+.clearfix.panel-footer.jobs{
+	background:#159a78;
+}
 
-.clearfix.panel-footer.employees input, .clearfix.panel-footer.employees button{
+.clearfix.panel-footer.jobs input, .clearfix.panel-footer.employees input, .clearfix.panel-footer.jobs button, .clearfix.panel-footer.employees button{
 	background: rgba(0,0,0,.3);
 	border-color:rgba(0,0,0,0);
 	color:white;
+}
+
+.availability .progress-bar{
+	background-color: #ffc017;
 }

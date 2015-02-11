@@ -1,20 +1,40 @@
-[
-	{
-	"name":"default",
-	"fields": [
-		'name',
-		'location',
-		'skill match',
-		'availability'
-	]
-},
+# [
+# 	{
+# 	"name":"default",
+# 	"fields": [
+# 		'name',
+# 		'location',
+# 		'skill match',
+# 		'availability'
+# 	]
+# },
+# {
+# 	"name":"backup",
+# 	"fields": [
+# 		'name',
+# 		'location',
+# 		'skill match',
+# 		'availability',
+# 	]
+# }	
+# ]
+
 {
-	"name":"backup",
-	"fields": [
-		'name',
-		'location',
-		'skill match',
-		'availability'
-	]
-}	
-]
+	"employees": {
+		"fields": [
+			'name',
+			'location',
+			'skillMatch',
+			'availability'
+		]
+	},
+	"jobs": {
+		"fields": [
+			'jobtitle',
+			'location',
+			'applicants',
+			'postedby',
+			'expires'
+		]
+	},
+}

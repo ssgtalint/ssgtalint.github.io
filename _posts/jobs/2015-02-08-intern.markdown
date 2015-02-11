@@ -1,0 +1,15 @@
+---
+layout: jobs
+jobtitle:  "Dev intern"
+date:   2015-02-08 10:38:43
+permalink: /job/:title
+location: Portland
+categories: 
+- jobs
+location: portland
+postedby: steeve
+applicants: 40
+expires: '1/1/11'
+---
+
+this is the portfolio of mandy

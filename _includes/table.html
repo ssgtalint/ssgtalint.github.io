@@ -1,62 +1,48 @@
-{% assign tableId = page.tableId %}
-{% assign table = site.data.table[page.tableId]  %}
+{% assign table = site.data.table[page.title].fields %} 
 
 <div class="table-responsive">
   <table class="table table-striped b-t b-light">
     <thead>
       <tr>
-        {{ table }}
-        <th class="th-sortable" data-toggle="class">name
+        {% for field in table %}
+          <th class="th-sortable" data-toggle="class">
+          {{ field }}
           <span class="th-sort">
             <i class="fa fa-sort-down text"></i>
             <i class="fa fa-sort-up text-active"></i>
             <i class="fa fa-sort"></i>
           </span>
         </th>
-        <th width="200" class="th-sortable" data-toggle="class">Task
-          <span class="th-sort">
-            <i class="fa fa-sort-down text"></i>
-            <i class="fa fa-sort-up text-active"></i>
-            <i class="fa fa-sort"></i>
-          </span>
-        </th>
-        <th width=200 class="th-sortable" data-toggle="class">Skill match
-          <span class="th-sort">
-            <i class="fa fa-sort-down text"></i>
-            <i class="fa fa-sort-up text-active"></i>
-            <i class="fa fa-sort"></i>
-          </span>
-        </th>
-        <th width=200 class="th-sortable" data-toggle="class">Availability
-          <span class="th-sort">
-            <i class="fa fa-sort-down text"></i>
-            <i class="fa fa-sort-up text-active"></i>
-            <i class="fa fa-sort"></i>
-          </span>
-        </th>
+        {% endfor %}
         <th width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox"><i></i></label></th>
-      </tr>
+      </tr> 
     </thead>
     <tbody>
-      {% for post in site.categories['employees'] %}
-        <tr>
-        <td>
-        <a href="{{ post.url }}">
-          <img src="/assets/images/a0.png" alt="...">
-          <span>{{ post.title }}</span>
-        </a>
-        </td>
-        <td>{{post.location }}</td>
-        <td>
-          <div class="progress progress-xs m-t-xs m-b-none">
-            <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{post.skillMatch}}%" style="width: {{post.skillMatch}}%"></div>
-          </div>
-        </td>
-        <td>
-          <div class="progress progress-xs m-t-xs m-b-none">
-            <div class="progress-bar bg-warning" data-toggle="tooltip" data-original-title="{{post.availability}}%" style="width: {{post.availability}}%"></div>
-          </div>
-        </td>
+      <tr>
+      {% for post in site.categories[page.title] %}
+        {% for field in table %}
+        <!-- if name -->
+          {% if field == "name" %}
+            <td>
+              <a href="{{ post.url }}">
+                <img src="/assets/images/a0.png" alt="...">
+                <span>{{ post.title }}</span>
+              </a>
+            </td>
+          {% else %} 
+            {% if field == "skillMatch" or field == "availability"%}
+              <td>
+              <div class="progress progress-xs m-t-xs m-b-none {{field}}">
+                <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{post[field]}}%" style="width: {{post[field]}}%"></div>
+              </div>
+            </td>
+            {% else %}
+              <td>{{post[field]}}</td>
+            {% endif %}
+          {% endif %}
+
+
+        {% endfor %}
         <td><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
       </tr>
       {% endfor %}

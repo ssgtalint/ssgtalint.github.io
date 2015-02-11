@@ -2,7 +2,6 @@
 layout: page
 title: employees
 permalink: /employees/
-tableId: 0;
 ---
 
 
@@ -25,10 +24,22 @@ tableId: 0;
     </div>
     <ul id="groups"class="list-group no-radius">
       	<li class="list-group-item">
-      		Applicants <input type="radio" class="pull-right">
+          <div class="checkbox i-checks">
+            <label>
+              <input type="checkbox" checked="" value="">
+              <i></i>
+              Applicants
+            </label>
+          </div>
       	</li>
       	<li class="list-group-item">
-      		Employees <input type="radio" class="pull-right">
+      		<div class="checkbox i-checks">
+            <label>
+              <input type="checkbox" checked="" value="">
+              <i></i>
+              Employees
+            </label>
+          </div>
       	</li>
       </ul>
   </div>
@@ -46,8 +57,12 @@ tableId: 0;
       <a href="#" class="font-bold">Skills</a>
       </div>
       <ul id="skills" class="collapse in list-group no-radius"> 
-  		<li class="list-group-item">trout fishing</li>
-		  <li class="list-group-item">trout fishing</li>
+  		<li class="list-group-item">Math
+      <input type="range">
+      </li>
+		  <li class="list-group-item">trout fishing
+      <input type="range">
+      </li>
       </ul>
   </div>
 </div>
@@ -63,9 +78,9 @@ tableId: 0;
     <div class="pull-right">
     	<select class="input-sm form-control input-s-sm inline v-middle">
       <option value="0">Bulk action</option>
-      <option value="1">Delete selected</option>
-      <option value="2">Bulk edit</option>
-      <option value="3">Export</option>
+      <option value="1">Send update request</option>
+      <option value="2">Compare</option>
+      <option value="3">Add to my contacts</option>
     </select>
     <button class="btn btn-sm btn-default">Apply</button>  
     </div>  

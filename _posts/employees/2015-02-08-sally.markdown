@@ -12,33 +12,4 @@ phoneNumber: 555-555-5555
 email: nwpointer@gmail.com
 ---
 
-
-<div id="employee-profile" class="row">
-	<div class="col-sm-2 employeeCol">
-		<img src="/assets/images/a0.png" alt="...">
-		<br><br>
-		<b>contact:</b><br>
-		<p>{{page.phoneNumber }} <br>
-		{{page.email }}</p><br>
-		<a href="#" class="btn btn-default">hire</a><br>
-		<b>team:</b><br>
-		<b>location:</b><br>
-		<b>works well with:</b><br>
-	</div>
-	<div class="col-sm-8 employeeCol">
-		<h2>{{page.title}}</h2>
-		<p>last varified by manager on 1/1/11</p>
-		
-
-		<br><br><br>
-		{% include form.html %}
-
-		<!-- <h4>Basic imformation</h4>
-		<form action="#">
-			
-		</form> -->
-	</div>
-	
-
-	
-</div>
+random totally cool content
