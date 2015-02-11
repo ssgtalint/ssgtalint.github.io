@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" class="app">
+{% include head.html %}
+
+  <body>
+  <section class="vbox">
+    {% include header.html %}
+
+
+    <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        {% include nav.html %} 
+        <!-- /.aside -->
+        {{ content }}
+
+        {% include footer.html %} 
+
+      </section>
+      <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
+    </section>
+  </section>
+  {% include postLoadedAssets.html %}
+  </body>
+
+</html>

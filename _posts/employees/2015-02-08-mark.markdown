@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Mark"
+date:   2015-02-08 10:38:43
+permalink: /employees/:title
+location: Portland
+skillMatch: 20
+availability: 10
+categories: 
+- employees
+---
+
+this is the portfolio of mark

@@ -1,0 +1,13 @@
+---
+layout: default
+permalink: /jobs/
+---
+
+
+<h1>Jobs</h1>
+
+
+{% for post in site.categories['employees'] %}
+    <li>title:{{ post.url }}</li>
+{% endfor %}
+

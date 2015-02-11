@@ -1,0 +1,20 @@
+[
+	{
+	"name":"default",
+	"fields": [
+		'name',
+		'location',
+		'skill match',
+		'availability'
+	]
+},
+{
+	"name":"backup",
+	"fields": [
+		'name',
+		'location',
+		'skill match',
+		'availability'
+	]
+}	
+]

@@ -1,0 +1,84 @@
+.add{
+	/*background: rgba(255,255,255,.1);*/
+	color: #FFF !important;
+	line-height: 36px;
+	width: 36px;
+	position: absolute;
+	right: -0.5px;
+	text-align: center;
+	z-index: 100;
+	display: block;
+}
+.add:hover{
+	background: rgba(255,255,255,.3);
+}
+html > .bg-white{
+	background-color: rgba(0,0,0,0);
+}
+
+#mock{
+	margin-left: -1.5rem;
+}
+
+
+.panel-footer .pagination{
+	margin-top: .5rem !important;
+}
+
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.btn-clear{
+	background: none !important;
+	box-shadow: none !important;
+	padding:0;
+}
+
+table img{
+	height: 30px;
+	border-radius: 30px;
+	display: inline;
+	margin-right:1rem;
+}
+
+#employee-profile{
+	background:white;
+	padding:1rem;
+	margin-top:12vh;
+	min-height: 90vh;
+	/*width:100%;*/
+	/*display: inline-block;*/
+}
+#employee-profile h2{
+	color:black;
+	text-transform: capitalize;
+}
+
+.employeeCol{
+	/*margin-top:-7vh;*/
+	position: relative;
+	top:-7.5vh;
+}
+
+#employee-profile h4{
+	color:#0F7DB7;
+}
+
+/*.employeeCol img{
+	width:100%;
+}*/
+
+.clearfix.panel-footer.employees{
+	background:rgb(18, 109, 167);
+}
+
+.clearfix.panel-footer.employees input, .clearfix.panel-footer.employees button{
+	background: rgba(0,0,0,.3);
+	border-color:rgba(0,0,0,0);
+	color:white;
+}
