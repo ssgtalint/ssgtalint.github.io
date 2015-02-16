@@ -1,0 +1,17 @@
+<div class="form-group">
+    <label class="col-lg-2 control-label">Title</label>
+    <div class="col-lg-10">
+        <select style="width:260px" class="chosen-select">
+            <optgroup label="Recent">
+                {% for post in site.categories['jobs'] %}
+                    <option value="{{post.title}}">{{ post.title }}</option>
+                {% endfor %}
+            </optgroup>
+            <optgroup label="Other">
+                {% for post in site.categories['jobs'] limit:5 %}
+                    <option value="{{post.title}}">{{ post.title }}</option>
+                {% endfor %}
+            </optgroup>
+        </select>
+  </div>
+</div>

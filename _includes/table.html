@@ -23,7 +23,7 @@
         {% for field in table %}
         <!-- if name -->
           {% if field == "name" %}
-            <td>
+            <td class="{{field}}">
               <a href="{{ post.url }}">
                 <img src="/assets/images/a0.png" alt="...">
                 <span>{{ post.title }}</span>
@@ -31,13 +31,13 @@
             </td>
           {% else %} 
             {% if field == "skillMatch" or field == "availability"%}
-              <td>
+              <td class="{{field}}">
               <div class="progress progress-xs m-t-xs m-b-none {{field}}">
                 <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{post[field]}}%" style="width: {{post[field]}}%"></div>
               </div>
             </td>
             {% else %}
-              <td>{{post[field]}}</td>
+              <td class="{{field}}">{{post[field]}}</td>
             {% endif %}
           {% endif %}
 

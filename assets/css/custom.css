@@ -89,3 +89,9 @@ table img{
 .availability .progress-bar{
 	background-color: #ffc017;
 }
+
+.header-button{
+	float:right;
+	position: relative;
+	top:-45px;
+}
