@@ -11,5 +11,3 @@ categories:
 phoneNumber: 555-555-5555
 email: nwpointer@gmail.com
 ---
-
-random totally cool content

@@ -60,7 +60,10 @@
   <script src="/assets/js/app.plugin.js"></script>
   <script type="text/javascript">
     $(function(){
-      $('.no-results').click(function(){ console.log('fpp'); });
+      $('.no-results').click(function(){ 
+        me = $(this);
+        console.log(me.html());
+      });
     });
 
   </script>

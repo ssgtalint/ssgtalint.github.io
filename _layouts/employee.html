@@ -1,71 +1,113 @@
 ---
 layout: default
 ---
-<div id="employee-profile" class="row">
-	<div class="col-sm-2 employeeCol">
-		<img src="/assets/images/a0.png" alt="...">
-		<br><br>
-		<b>contact:</b><br>
-		<p>{{page.phoneNumber }} <br>
-		{{page.email }}</p><br>
-		<a href="#" class="btn btn-default">hire</a><br>
-		<b>team:</b><br>
-		<b>location:</b><br>
-		<b>works well with:</b><br>
-	</div>
-	<div class="col-sm-8 employeeCol">
-		<h2>{{page.title}}</h2>
-		<p>last varified by manager on 1/1/11</p>
-		
+<section class="row">
+<br><br>
+  <div class="col-md-8" style="background:white; margin:auto; float:none;padding-top:5rem;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center">
+          <img src="/assets/images/a0.png" alt="..." class="img-circle m-b">
+          <h3 class="font-bold m-b-none m-t-none">Drew Willon</h3>
+          <p><i class="fa fa-lg fa-circle text-primary m-r-sm" style="font-size:.8rem; position:relative; left:.5rem;bottom:.1rem"></i><strong>varified by manager 1/1/11</strong></p>
 
-		<br><br>
-
-		<!-- <h4>Basic imformation</h4>
-		<form action="#">
-			
-		</form> -->
-		{{ content }}
-
-		<br><br>
-
-		<section class="panel panel-default">
-  <header class="panel-heading font-bold">Horizontal form</header>
-  <div class="panel-body">
-    <form class="bs-example form-horizontal">
-      <div class="form-group">
-        <label class="col-lg-2 control-label">Email</label>
-        <div class="col-lg-10">
-          <input type="email" class="form-control" placeholder="Email">
-          <span class="help-block m-b-none">Example block-level help text here.</span>
-        </div>
+          <a href="#" for="filestyle-0" class="btn btn-s-md btn-primary">Hire</a>
+          <a href="#" class="btn btn-s-md btn-default">edit</a>
+        </div>                 
       </div>
-      <div class="form-group">
-        <label class="col-lg-2 control-label">Password</label>
-        <div class="col-lg-10">
-          <input type="password" class="form-control" placeholder="Password">
-        </div>
+      <div class="col-md-6">
+        
+        <!-- <p>drew.willon@scale.com</p> -->
+        
       </div>
-      <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-          <div class="checkbox i-checks">
-            <label>
-              <input type="checkbox" checked=""><i></i> Remember me
-            </label>
+    </div>
+    <div class="line b-b m-t m-b"></div>
+    <div class="wrapper m-b">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row m-b">
+        <div class="col-xs-6">
+          <small>Cell Phone</small>
+          <div class="text-lt font-bold">
+            {{page.phoneNumber }}
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <small>Email</small>
+          <div class="text-lt font-bold">
+            {{page.email }}
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-          <button type="submit" class="btn btn-sm btn-default">Sign in</button>
+      <div class="row m-b">
+        <div class="col-xs-6">
+          <small>Manager</small>
+          <div class="text-lt font-bold">Coch Jose</div>
+        </div>
+        <div class="col-xs-6">
+          <small>location</small>
+          <div class="text-lt font-bold">
+            {{page.location }}
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <small>Bio</small>
+        <div class="text-lt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
+      </div>
+      <br><br>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel b-a">
+              <div class="panel-heading b-b">
+              <button class="btn btn-clear pull-right" data-toggle="button">
+                <span class="text" data-toggle="collapse" data-target="#skills">
+                  <i class="fa fa-chevron-right rotate90"></i> 
+                </span>
+                <span class="text-active" data-toggle="collapse" data-target="#skills">
+                  <i class="fa fa-chevron-right "></i>
+                </span>
+                </button>
+              <a href="#" class="font-bold">Core Skills</a>
+              </div>
+              <ul id="skills" class="collapse in list-group no-radius"> 
+              <li class="list-group-item">Math
+              <input type="range">
+              </li>
+              <li class="list-group-item">trout fishing
+              <input type="range">
+              </li>
+              </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel b-a">
+              <div class="panel-heading b-b">
+              <button class="btn btn-clear pull-right" data-toggle="button">
+                <span class="text" data-toggle="collapse" data-target="#skills2">
+                  <i class="fa fa-chevron-right rotate90"></i> 
+                </span>
+                <span class="text-active" data-toggle="collapse" data-target="#skills2">
+                  <i class="fa fa-chevron-right "></i>
+                </span>
+                </button>
+              <a href="#" class="font-bold">Additional skills</a>
+              </div>
+              <ul id="skills2" class="collapse in list-group no-radius"> 
+              <li class="list-group-item">Math
+              <input type="range">
+              </li>
+              <li class="list-group-item">trout fishing
+              <input type="range">
+              </li>
+              </ul>
+          </div>
         </div>
       </div>
-    </form>
+
+    </div>    
   </div>
+
 </section>
-	</div>
-		
-</div>
-
-
-
-
