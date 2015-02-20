@@ -4,12 +4,19 @@ title:  "Mandy Esquire"
 date:   2015-02-08 10:38:43
 permalink: /employees/:title
 location: Portland
+position: "Sales Manager"
 skillMatch: 20
 availability: 10
 categories: 
 - employees
 phoneNumber: 555-555-5555
 email: nwpointer@gmail.com
+coreSkills:
+- math
+- foo
+additionalSkills:
+- fooo
+- bar
 ---
 
 this is the portfolio of mark

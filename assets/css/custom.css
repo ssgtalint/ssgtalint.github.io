@@ -46,29 +46,29 @@ table img{
 	margin-right:1rem;
 }
 
-/*#employee-profile{
+#employee-profile{
 	background:white;
 	padding:1rem;
 	margin-top:12vh;
 	min-height: 90vh;
-	width:100%;
-	display: inline-block;
+	/*width:100%;*/
+	/*display: inline-block;*/
 }
 #employee-profile h2{
 	color:black;
 	text-transform: capitalize;
-}*/
+}
 
-/*.employeeCol{
+.employeeCol{
 	/*margin-top:-7vh;*/
 	position: relative;
 	top:-7.5vh;
-}*/
+}
 
-/*#employee-profile h4{
+#employee-profile h4{
 	color:#0F7DB7;
 }
-*/
+
 /*.employeeCol img{
 	width:100%;
 }*/
@@ -94,4 +94,22 @@ table img{
 	float:right;
 	position: relative;
 	top:-45px;
+}
+
+.slider-handle:not(.round){
+	display: none;
+}
+
+.secondary-drop-button{
+	position: relative;
+	right:1rem;
+}
+
+.links a{
+	width: 30%;
+	display: inline-block;
+}
+
+.slider.slider-horizontal{
+	width:100% !important;
 }

@@ -7,8 +7,10 @@ title: jobs
 
 <h1>Jobs</h1>
 
-
-
+<a href="/employees/new" for="filestyle-0" class="btn btn-s-md btn-success header-button" style="
+margin-bottom: -3.2rem;">New Job Listing</a>
+<a href="#" for="filestyle-0" class="btn btn-s-md header-button" style="
+margin-bottom: -3.2rem; margin-right:2rem">+ Import Job Listings</a>
 <br><br>
 
 <section class="row">
@@ -50,27 +52,7 @@ title: jobs
       </ul>
   </div>
 
-  <div class="panel b-a">
-    <div class="panel-heading b-b">
-      <button class="btn btn-clear pull-right" data-toggle="button" >
-        <span class="text" data-toggle="collapse" data-target="#skills">
-          <i class="fa fa-chevron-right rotate90"></i> 
-        </span>
-        <span class="text-active" data-toggle="collapse" data-target="#skills">
-          <i class="fa fa-chevron-right "></i>
-        </span>
-        </button>
-      <a href="#" class="font-bold">Skills</a>
-      </div>
-      <ul id="skills" class="collapse in list-group no-radius"> 
-  		<li class="list-group-item">Math
-      <input type="range">
-      </li>
-		  <li class="list-group-item">trout fishing
-      <input type="range">
-      </li>
-      </ul>
-  </div>
+  {% include skills.html %}
 </div>
 
 <div class="col-md-8 col-lg-9">

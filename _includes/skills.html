@@ -1,0 +1,26 @@
+<div class="panel b-a">
+    <div class="panel-heading b-b">
+
+      <button class="btn btn-clear pull-right" data-toggle="button" >
+        <span class="text" data-toggle="collapse" data-target="#skills">
+          <i class="fa fa-chevron-right rotate90"></i> 
+        </span>
+        <span class="text-active" data-toggle="collapse" data-target="#skills">
+          <i class="fa fa-chevron-right "></i>
+        </span>
+      </button>
+      <button class="btn btn-clear pull-right secondary-drop-button" >
+        <i class="fa fa-plus pull-right "></i>
+      </button>
+      <a href="#" class="font-bold">Skills</a>
+      </div>
+
+      <ul id="skills" class="collapse in list-group no-radius">
+  		<li class="list-group-item">Math
+      {% include skillSlider.html %}
+      </li>
+		  <li class="list-group-item">trout fishing
+      {% include skillSlider.html %}
+      </li>
+      </ul>
+  </div>

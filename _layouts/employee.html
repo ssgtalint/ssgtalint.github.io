@@ -8,8 +8,11 @@ layout: default
       <div class="col-md-12">
         <div class="text-center">
           <img src="/assets/images/a0.png" alt="..." class="img-circle m-b">
-          <h3 class="font-bold m-b-none m-t-none">Drew Willon</h3>
-          <p><i class="fa fa-lg fa-circle text-primary m-r-sm" style="font-size:.8rem; position:relative; left:.5rem;bottom:.1rem"></i><strong>varified by manager 1/1/11</strong></p>
+          <h3 class="font-bold m-b-none m-t-none">{{page.title}}</h3>
+          <!-- <p>
+          <strong>{{page.position}}</strong>
+          </p> -->
+          <p><i class="fa fa-lg fa-circle text-primary m-r-sm" style="font-size:.8rem; position:relative; left:.5rem;bottom:.1rem;"></i><strong>varified by manager 1/1/11</strong></p>
 
           <a href="#" for="filestyle-0" class="btn btn-s-md btn-primary">Hire</a>
           <a href="#" class="btn btn-s-md btn-default">edit</a>
@@ -56,6 +59,13 @@ layout: default
         <small>Bio</small>
         <div class="text-lt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
       </div>
+      <br>
+      <div class="links">
+        <small>Links</small><br>
+        <a class="text-lt font-bold" href="#">Resume</a> 
+        <a class="text-lt font-bold" href="#">Portfolio</a> 
+        <a class="text-lt font-bold" href="#">Linkdin</a>
+      </div>
       <br><br>
         </div>
 
@@ -74,10 +84,10 @@ layout: default
               </div>
               <ul id="skills" class="collapse in list-group no-radius"> 
               <li class="list-group-item">Math
-              <input type="range">
+              <br>{% include skillSlider.html %}
               </li>
               <li class="list-group-item">trout fishing
-              <input type="range">
+              <br>{% include skillSlider.html %}
               </li>
               </ul>
           </div>
@@ -97,17 +107,22 @@ layout: default
               </div>
               <ul id="skills2" class="collapse in list-group no-radius"> 
               <li class="list-group-item">Math
-              <input type="range">
+              <br>{% include skillSlider.html %}
               </li>
               <li class="list-group-item">trout fishing
-              <input type="range">
+              <br>{% include skillSlider.html %}
               </li>
               </ul>
           </div>
         </div>
       </div>
-
+      <br>
+      {% include chart.html %}
+      <br>
+      <!-- {% include history.html %} -->
     </div>    
   </div>
 
+
 </section>
+
