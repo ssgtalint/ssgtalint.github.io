@@ -1,5 +1,12 @@
-{% assign table = site.data.table[page.title].fields %} 
-
+{% if site.categories[page.title].size %}
+  {% assign table = site.data.table[page.title].fields %} 
+  {% assign tabledata = site.categories[page.title]%}
+  {% assign all = true %}
+{%else%}
+  {% assign table = site.data.table['employees'].fields %}
+  {% assign tabledata = site.categories['employees'] %}
+  {% assign all = false %}
+{%endif %}
 <div class="table-responsive">
   <table class="table table-striped b-t b-light">
     <thead>
@@ -19,31 +26,42 @@
     </thead>
     <tbody>
       <tr>
-      {% for post in site.categories[page.title] %}
-        {% for field in table %}
-        <!-- if name -->
-          {% if field == "name" %}
-            <td class="{{field}}">
-              <a href="{{ post.url }}">
-                <img src="/assets/images/a0.png" alt="...">
-                <span>{{ post.title }}</span>
-              </a>
-            </td>
-          {% else %} 
-            {% if field == "skillMatch" or field == "availability"%}
-              <td class="{{field}}">
-              <div class="progress progress-xs m-t-xs m-b-none {{field}}">
-                <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{post[field]}}%" style="width: {{post[field]}}%"></div>
-              </div>
-            </td>
-            {% else %}
-              <td class="{{field}}">{{post[field]}}</td>
-            {% endif %}
-          {% endif %}
-
-
+      {% for post in tabledata %}
+        {% for field in table %} 
+          {% if all or page.Applicants contains post.ApplicantId %}
+              {% if field == "jobtitle" %}
+                <td class="{{field}}">
+                  <a href="{{ post.url }}">
+                    <span>{{ post.jobtitle }}</span>
+                  </a>
+                </td>
+              {% elsif field == "name" %}
+                <td class="{{field}}">
+                  <a href="{{ post.url }}">
+                    <img src="/assets/images/a0.png" alt="...">
+                    <span>{{ post.title }}</span>
+                  </a>
+                </td>
+              {% elsif field == "applicants" %}
+                <td class="{{field}}">
+                  <a href="{{ post.url }}">
+                    <span>{{ post.Applicants.size }}</span>
+                  </a>
+                </td>
+              {% else %} 
+                {% if field == "skillMatch" or field == "availability"%}
+                  <td class="{{field}}">
+                  <div class="progress progress-xs m-t-xs m-b-none {{field}}">
+                    <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{post[field]}}%" style="width: {{post[field]}}%"></div>
+                  </div>
+                </td>
+                {% else %}
+                  <td class="{{field}}">{{post[field]}}</td>
+                {% endif %}
+              {% endif %}
+          {%endif%}
         {% endfor %}
-        <td><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
+        {% if all or post.ApplicantId == 0 %} <td><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox" name="post[]"><i></i></label></td> {% endif %}
       </tr>
       {% endfor %}
     </tbody>

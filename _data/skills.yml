@@ -1,0 +1,25 @@
+{
+	"names":['Calculus', 'Python'],
+	"skillsets":[
+		[
+			{
+				"id":0,
+				"rank":5
+			},
+			{
+				"id":1,
+				"rank":2
+			}
+		],
+		[
+			{
+				"id":1,
+				"rank":5
+			},
+			{
+				"id":0,
+				"rank":2
+			}
+		]
+	]
+}

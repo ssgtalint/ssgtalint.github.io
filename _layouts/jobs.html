@@ -1,3 +1,104 @@
 ---
 layout: default
 ---
+
+<h2>Applicants for {{page.jobtitle}}</h2>
+<br>
+
+<a href="#" for="filestyle-0" class="btn btn-s-md header-button" style="top: -60px;
+margin-bottom: -3.2rem; margin-right:2rem">Export Applications</a>
+<a href="/listing" for="filestyle-0" class="btn btn-s-md header-button" style="top: -60px;
+margin-bottom: -3.2rem; margin-right:2rem">View listing</a>
+<a href="/jobs/edit" for="filestyle-0" class="btn btn-s-md header-button" style="top: -60px;
+margin-bottom: -3.2rem; margin-right:2rem">Edit listing</a>
+<section class="row" id="sUsers">
+<div class="col-md-4 col-lg-3">
+  <div class="panel b-a">
+    {% include searchbar.html %}
+
+    <div class="panel-heading b-b">
+      <button class="btn btn-clear pull-right" data-toggle="button" >
+        <span class="text" data-toggle="collapse" data-target="#groups">
+          <i class="fa fa-chevron-right rotate90"></i> 
+        </span>
+        <span class="text-active" data-toggle="collapse" data-target="#groups">
+          <i class="fa fa-chevron-right "></i>
+        </span>
+        </button>
+      <a href="#" class="font-bold">Groups</a>
+      
+    </div>
+    <ul id="groups"class="list-group no-radius">
+      	<li class="list-group-item">
+          <div class="checkbox i-checks">
+            <label>
+              <input type="checkbox" checked="" value="">
+              <i></i>
+              Internal
+            </label>
+          </div>
+      	</li>
+      	<li class="list-group-item">
+      		<div class="checkbox i-checks">
+            <label>
+              <input type="checkbox" checked="" value="">
+              <i></i>
+              External
+            </label>
+          </div>
+      	</li>
+      </ul>
+  </div>
+ 
+  {% include skills.html %}
+</div>
+
+<div class="col-md-8 col-lg-9">
+<section class="panel panel-default">
+<header class="panel-heading" style="background:white">
+  <div class="row">
+  	<div class="col-xs-4" style="line-height:30px;">
+  	Results ({{site.categories['employees'] | size }})
+  </div>
+  <div class="col-xs-8">
+    <div class="pull-right">
+    	<select class="input-sm form-control input-s-sm inline v-middle">
+      <option value="0">Bulk action</option>
+      <option value="1">Send update request</option>
+      <option value="2">Compare</option>
+      <option value="3">Add to my contacts</option>
+    </select>
+    <button class="btn btn-sm btn-default">Apply</button>  
+    </div>  
+  </div>
+  </div>
+</header>
+
+{% include table.html %}
+
+<footer class="panel-footer">
+  <div class="row">
+    <div class="col-xs-4 col-sm-6">
+      <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+    </div>
+    <div class="col-xs-8 col-sm-6 text-right text-center-xs">                
+      <ul class="pagination pagination-sm m-t-none m-b-none pull-right">
+        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</section>
+</div>
+
+
+
+</section>
+
+

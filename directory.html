@@ -1,0 +1,56 @@
+---
+layout: basic
+route: directory
+---
+
+<section class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<br>
+			<h1>Employee directory</h1>
+			<!-- <a href="/employees/new" for="filestyle-0" class=" header-button" style="top: -30px;
+margin-bottom: -3.2rem;">print</a> -->
+			<input type="email" class="form-control pull-right" id="exampleInputEmail2" placeholder="search" style="width:300px !important; position:relative; top:-35px;">
+			<br><br>
+		</div>
+	</div>
+	
+	{%for i in (0...5) %}
+		<div class="row">
+		<div class="col-sm-12">
+			
+		</div>
+		<div class="col-sm-2">
+			<img src="/assets/images/a0.png" alt="..." class="hidden-xs">
+		</div>
+		<div class="col-sm-10">
+			<div class="wrapper m-b" style="position:relative; top:-35px;">
+					<h3>
+						<img src="/assets/images/a0.png" alt="..." class="img-circle hidden-md hidden-sm hidden-lg" width="50px" style="margin-right:1rem;">
+						Jogn smity
+					</h3>
+                    <div class="row m-b">
+                      <div class="col-sm-4 col-xs-6">
+                        <small>Cell Phone</small>
+                        <div class="text-lt font-bold">1243 0303 0333</div>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <small>Family Phone</small>
+                        <div class="text-lt font-bold">+32(0) 3003 234 543</div>
+                      </div>
+                    </div>
+                    <div class="row m-b">
+                      <div class="col-sm-4 col-xs-6">
+                        <small>Reporter</small>
+                        <div class="text-lt font-bold">Coch Jose</div>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <small>Manager</small>
+                        <div class="text-lt font-bold">James Richo</div>
+                      </div>
+                    </div>
+                  </div>
+		</div>
+	</div>
+	{% endfor %}
+</section>
