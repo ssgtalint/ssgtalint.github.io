@@ -113,3 +113,16 @@ table img{
 .slider.slider-horizontal{
 	width:100% !important;
 }
+
+.hidden-bydefault{
+	display: none;
+}
+
+/*.hr-only,
+.manager-only,
+.employee-only,
+.not-hr,
+.not-manager,
+.not-employee{
+	display: none;
+}*/

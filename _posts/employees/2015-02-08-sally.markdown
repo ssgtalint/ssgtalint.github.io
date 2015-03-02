@@ -13,4 +13,6 @@ categories:
 - employees
 phoneNumber: 555-555-5555
 email: nwpointer@gmail.com
+manage: true
+"pay grade": 50
 ---

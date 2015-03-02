@@ -25,7 +25,8 @@
 			'name',
 			'location',
 			'skillMatch',
-			'availability'
+			'availability',
+			'pay grade'
 		]
 	},
 	"jobs": {

@@ -11,6 +11,8 @@ categories:
 - employees
 phoneNumber: 555-555-5555
 email: nwpointer@gmail.com
+manage: false
+"pay grade": 20
 ---
 
 this is the portfolio of mark

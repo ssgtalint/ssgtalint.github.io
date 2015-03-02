@@ -8,6 +8,7 @@ location: Portland
 position: "Sales Manager"
 skillMatch: 20
 availability: 10
+
 categories: 
 - employees
 phoneNumber: 555-555-5555
@@ -18,6 +19,8 @@ coreSkills:
 additionalSkills:
 - fooo
 - bar
+manage: false
+"pay grade": 400
 ---
 
 this is the portfolio of mark

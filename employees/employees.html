@@ -3,16 +3,16 @@ layout: page
 title: employees
 permalink: /employees/
 ---
-<a href="/employees/new" for="filestyle-0" class="btn btn-s-md btn-primary header-button" style="top: -85px;
+<a href="/employees/new" for="filestyle-0" class="btn btn-s-md btn-primary header-button not-employee" style="top: -85px;
 margin-bottom: -3.2rem;">New Employee</a>
-<a href="#" for="filestyle-0" class="btn btn-s-md header-button" style="top: -85px;
+<a href="#" for="filestyle-0" class="btn btn-s-md header-button not-employee" style="top: -85px;
 margin-bottom: -3.2rem; margin-right:2rem">+ Import employees</a>
 <a href="/directory" for="filestyle-0" class="btn btn-s-md header-button" style="top: -85px;
 margin-bottom: -3.2rem; margin-right:2rem;">employee directory</a>
 
 <section class="row" id="sUsers">
 <div class="col-md-4 col-lg-3">
-  <div class="panel b-a">
+  <div class="panel b-a" class="">
     {% include searchbar.html %}
 
     <div class="panel-heading b-b">
@@ -27,9 +27,9 @@ margin-bottom: -3.2rem; margin-right:2rem;">employee directory</a>
       <a href="#" class="font-bold">Groups</a>
       
     </div>
-    <ul id="groups"class="list-group no-radius">
-      	<li class="list-group-item">
-          <div class="checkbox i-checks">
+    <ul id="groups" class="list-group no-radius">
+      	<li class="list-group-item not-employee">
+          <div class="checkbox i-checks ">
             <label>
               <input type="checkbox" checked="" value="">
               <i></i>
