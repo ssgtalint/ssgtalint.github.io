@@ -13,12 +13,30 @@
 <script src="/assets/js/charts/flot/jquery.flot.resize.js"></script>
 <script src="/assets/js/charts/flot/jquery.flot.grow.js"></script>
 <script src="/assets/js/charts/flot/demo.js"></script>
+<!-- slider -->
+<script src="/assets/js/slider/bootstrap-slider.js"></script>
 
 <script src="/assets/js/calendar/bootstrap_calendar.js"></script>
 <script src="/assets/js/calendar/demo.js"></script>
 
-<!-- <script src="/assets/js/sortable/jquery.sortable.js"></script> -->
 <script src="/assets/js/app.plugin.js"></script>
 
 <script src="/assets/js/cookies.js"></script>
 <script src="/assets/js/roles.js"></script>
+
+<script>
+  $("#groups input[type='checkbox']:checked ").change(function(){
+  	var app = $('#applicants:checked').length > 0;
+  	var emp = $('#employees:checked').length > 0;
+	if(app){
+		$(".internal-true").show();
+	}else{
+		$(".internal-true").hide();
+	}
+	if(emp){
+		$(".internal-false").show();
+	}else{
+		$(".internal-false").hide();
+	}
+  });
+</script>

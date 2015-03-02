@@ -6,7 +6,7 @@ date:   2015-02-08 10:38:43
 permalink: /employees/:title
 position: "Sales Manager"
 location: "Tampa, Florida"
-
+internal: true
 skillMatch: 75
 availability: 40
 categories: 

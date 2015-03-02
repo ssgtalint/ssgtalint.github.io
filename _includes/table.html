@@ -7,12 +7,13 @@
   {% assign tabledata = site.categories['employees'] %}
   {% assign all = false %}
 {%endif %}
+<div id="list-filter">
 <div class="table-responsive">
   <table class="table table-striped b-t b-light">
     <thead>
       <tr>
         {% for field in table %}
-          <th class="th-sortable {% if field == "pay grade" %} manager-only {% endif %}" data-toggle="class">
+          <th data-sort="{{field}}" class="th-sortable sort {% if field == "pay grade" %} manager-only {% endif %}" data-toggle="class">
           {{ field }}
           <span class="th-sort">
             <i class="fa fa-sort-down text"></i>
@@ -21,10 +22,10 @@
           </span>
         </th>
         {% endfor %}
-        <th width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox"><i></i></label></th>
+        <th  width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox"><i></i></label></th>
       </tr> 
     </thead>
-    <tbody>
+    <tbody class="list">
       <tr>
       {% for post in tabledata %}
         {% for field in table %} 
@@ -61,3 +62,11 @@
     </tbody>
   </table>
 </div>
+</div>
+<script>
+        var options = {
+          valueNames: [ 'name', 'born' ]
+        };
+
+        var userList = new List('list-filter', options);
+      </script>

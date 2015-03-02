@@ -2,43 +2,76 @@
 layout: basic
 ---
 
+{% assign table = site.data.table['employees'].fields %}
+{% assign tabledata = site.categories['employees'] %}
+
 <div class="container">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<br><br>
-			
-			  <div id="list-filter">
-				  <input class="search" placeholder="Search" />
-				  <section class="panel panel-default">
-				  	<header class="panel-heading" >
-				  		hia
-				  	</header>
-				  	<table class="table table-striped b-t b-light">
+	<br><br>
+  	<div id="list-filter">
+	  <div class="row">
+		  <section class="col-md-4 col-lg-3">
+		  	<div class="panel b-a" class="">
+			  	{% include searchbar.html %}
+			  	{% include catagories.html %}
+			</div>
+			{% include skills.html %}
+		  </section>
+		  <section class="col-md-8 col-lg-9">
+		  	<div class="panel-default panel">
+			  	<header class="panel-heading" >
+			  		hia
+			  	</header>
+			  	<div class="table-responsive">
+			  		<table class="table table-striped b-t b-light">
 				    <!-- IMPORTANT, class="list" have to be at tbody -->
 				    <thead>
-				    	<th class="sort" data-sort="name">Sort by name</th>
-				    	<th class="sort" data-sort="born">Sort by manage</th>
+				    	<tr>
+				    		{% for field in table %}
+						        <th data-sort="{{field}}" class="th-sortable sort {% if field == "pay grade" %} manager-only {% endif %}" data-toggle="class">
+						          {{ field }}
+						          <span class="th-sort">
+						            <i class="fa fa-sort-down text"></i>
+						            <i class="fa fa-sort-up text-active"></i>
+						            <i class="fa fa-sort"></i>
+						          </span>
+						        </th>
+					        {% endfor %}
+					        <th  width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox"><i></i></label></th>
+				    	</tr>
 				    </thead>
 				    <tbody class="list">
-				      {%for emp in site.categories['employees']%}
-						<tr>
-						    <td class="name">{{emp.title}}</td>
-						    <td class="born">{{emp.manage}}</td>
+				    	{%for post in tabledata%}
+				    	<tr class="internal-{{post.internal}}">
+				      		{% for field in table %} 
+
+							    {%case field%}
+							    	{% when "name" %}
+							    		<td class="{{field}}">{{post['title']}}</td>
+							    	{% else %}
+										<td class="{{field}}">{{post[field]}}</td>
+							    {%endcase%}
+							{% endfor %}
+							<th  width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox"><i></i></label></th>
 						</tr>
-					  {% endfor %}
+					 	{% endfor %}
 				    </tbody>
 				  </table>
-				  </section>
-
-				</div>
-				<script src="http://listjs.com/no-cdn/list.js"></script>
-			<script>
-				var options = {
-				  valueNames: [ 'name', 'born' ]
-				};
-
-				var userList = new List('list-filter', options);
-			</script>
-		</div>
+			  	</div>
+		  	</div>
+		  </section>
+	  </div>
 	</div>
+	<script src="http://listjs.com/no-cdn/list.js"></script>
+	<script>
+		var options = {
+		  valueNames: [ 
+			{% for field in table %}
+				'{{field}}',
+			{%endfor%} 
+		  ]
+		};
+
+		var userList = new List('list-filter', options);
+	</script>
+
 </div>

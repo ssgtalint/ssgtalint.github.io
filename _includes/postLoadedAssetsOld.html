@@ -18,25 +18,6 @@
   <script src="/assets/js/typehead/typeahead.bundle.min.js"></script>
   <script src="/assets/js/typehead/demo.js"></script>
   <script src="/assets/js/app.plugin.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+  <script src="/assets/js/bower_components/list.js/dist/list.min.js"></script>
   <script src="/assets/js/cookies.js"></script>
   <script src="/assets/js/roles.js"></script>
-
-  <script>
-  $(function(){
-    var options = {
-      valueNames: [ 'location', 'name' ]
-    };
-
-    var userList = new List('sUsers', options);
-    });
-  </script>
-  <script type="text/javascript">
-    $(function(){
-      $('.no-results').click(function(){ 
-        me = $(this);
-        console.log(me.html());
-      });
-    });
-
-  </script>
