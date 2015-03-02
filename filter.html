@@ -1,0 +1,44 @@
+---
+layout: basic
+---
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<br><br>
+			
+			  <div id="list-filter">
+				  <input class="search" placeholder="Search" />
+				  <section class="panel panel-default">
+				  	<header class="panel-heading" >
+				  		hia
+				  	</header>
+				  	<table class="table table-striped b-t b-light">
+				    <!-- IMPORTANT, class="list" have to be at tbody -->
+				    <thead>
+				    	<th class="sort" data-sort="name">Sort by name</th>
+				    	<th class="sort" data-sort="born">Sort by manage</th>
+				    </thead>
+				    <tbody class="list">
+				      {%for emp in site.categories['employees']%}
+						<tr>
+						    <td class="name">{{emp.title}}</td>
+						    <td class="born">{{emp.manage}}</td>
+						</tr>
+					  {% endfor %}
+				    </tbody>
+				  </table>
+				  </section>
+
+				</div>
+				<script src="http://listjs.com/no-cdn/list.js"></script>
+			<script>
+				var options = {
+				  valueNames: [ 'name', 'born' ]
+				};
+
+				var userList = new List('list-filter', options);
+			</script>
+		</div>
+	</div>
+</div>
