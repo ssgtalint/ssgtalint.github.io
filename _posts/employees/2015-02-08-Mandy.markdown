@@ -2,7 +2,6 @@
 layout: employee
 skillsid: 0
 title: "Mandy Esquire"
-date: 2015-02-08 10:38:43
 permalink: /employees/:title
 location: Portland
 position: "Sales Manager"
@@ -22,5 +21,3 @@ additionalSkills:
 manage: false
 "pay grade": 400
 ---
-
-this is the portfolio of mark
