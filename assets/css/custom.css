@@ -118,6 +118,9 @@ table img{
 	display: none;
 }
 
+.not-btn{
+	padding:0px;
+}
 /*.hr-only,
 .manager-only,
 .employee-only,

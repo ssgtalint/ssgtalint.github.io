@@ -2,7 +2,7 @@
 // hr-only
 // employee-only
 
-console.log(getCookie("account_type"));
+// console.log(getCookie("account_type"));
 
 if(getCookie("account_type") != 'hr'){
 	$('.hr-only').hide();

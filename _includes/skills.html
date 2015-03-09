@@ -1,10 +1,11 @@
 {% assign skills = site.data.skills.skillsets[page.skillsid] %} 
 {% assign skillNames = site.data.skills.names %} 
+
   
 {% if skills.size %}
-  <div class="panel b-a">
+  <div class="panel b-a" id="skills">
       <div class="panel-heading b-b">
-
+        
         <button class="btn btn-clear pull-right" data-toggle="button" >
           <span class="text" data-toggle="collapse" data-target="#skills">
             <i class="fa fa-chevron-right rotate90"></i> 
@@ -14,12 +15,15 @@
           </span>
         </button>
         <button class="btn btn-clear pull-right secondary-drop-button" >
-          <i class="fa fa-plus pull-right "></i>
+          <i class="fa fa-plus pull-right"></i>
         </button>
-        <a href="#" class="font-bold">Skills</a>
+        
+        <a href="#" id="skillsheader" class="font-bold">Skills</a>
+        
       </div>
 
         <ul id="skills" class="collapse in list-group no-radius">
+        <li class="list-group-item" id="skilltypehead" ><input type="text" class="form-control" id="typehead" placeholder="add skill"></li>
         {% for skill in skills %}
           <li class="list-group-item">{{skillNames[skill.id]}}
             {% include skillSlider.html %}
@@ -43,7 +47,7 @@
         <button class="btn btn-clear pull-right secondary-drop-button" >
           <i class="fa fa-plus pull-right "></i>
         </button>
-        <a href="#" class="font-bold">Skills</a>
+        <a href="#" id="skillsheader" class="font-bold">Skills</a>
         </div>
 
         <ul id="skills" class="collapse in list-group no-radius">
@@ -56,3 +60,20 @@
         </ul>
     </div>
 {%endif%}
+
+<script>
+  {% for skill in skills %}
+    requiredSkills[{{skill.id}}] = {{skill.rank}};
+  {% endfor %}
+
+
+</script>
+
+
+
+
+
+
+
+
+

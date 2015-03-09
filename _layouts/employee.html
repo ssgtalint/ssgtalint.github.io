@@ -71,50 +71,8 @@ layout: default
         </div>
 
         <div class="col-md-6">
-          <div class="panel b-a">
-              <div class="panel-heading b-b">
-              <button class="btn btn-clear pull-right" data-toggle="button">
-                <span class="text" data-toggle="collapse" data-target="#skills">
-                  <i class="fa fa-chevron-right rotate90"></i> 
-                </span>
-                <span class="text-active" data-toggle="collapse" data-target="#skills">
-                  <i class="fa fa-chevron-right "></i>
-                </span>
-                </button>
-              <a href="#" class="font-bold">Core Skills</a>
-              </div>
-              <ul id="skills" class="collapse in list-group no-radius"> 
-              <li class="list-group-item">Math
-              <br>{% include skillSlider.html %}
-              </li>
-              <li class="list-group-item">trout fishing
-              <br>{% include skillSlider.html %}
-              </li>
-              </ul>
-          </div>
+          {% include skills.html %}
         </div>
-        <div class="col-md-6">
-          <div class="panel b-a">
-              <div class="panel-heading b-b">
-              <button class="btn btn-clear pull-right" data-toggle="button">
-                <span class="text" data-toggle="collapse" data-target="#skills2">
-                  <i class="fa fa-chevron-right rotate90"></i> 
-                </span>
-                <span class="text-active" data-toggle="collapse" data-target="#skills2">
-                  <i class="fa fa-chevron-right "></i>
-                </span>
-                </button>
-              <a href="#" class="font-bold">Additional skills</a>
-              </div>
-              <ul id="skills2" class="collapse in list-group no-radius"> 
-              <li class="list-group-item">Math
-              <br>{% include skillSlider.html %}
-              </li>
-              <li class="list-group-item">trout fishing
-              <br>{% include skillSlider.html %}
-              </li>
-              </ul>
-          </div>
         </div>
       </div>
       <br>

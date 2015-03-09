@@ -1,12 +1,12 @@
----
-layout: basic
-skillsid: 0
----
-
-{% assign table = site.data.table['employees'].fields %}
-{% assign tabledata = site.categories['employees'] %}
-
-
+{% if site.categories[page.title].size %}
+  {% assign table = site.data.table[page.title].fields %} 
+  {% assign tabledata = site.categories[page.title]%}
+  {% assign all = true %}
+{%else%}
+  {% assign table = site.data.table['employees'].fields %}
+  {% assign tabledata = site.categories['employees'] %}
+  {% assign all = false %}
+{%endif %}
 <div class="container">
 	<br><br>
   	<div id="list-filter">

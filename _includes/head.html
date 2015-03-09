@@ -22,4 +22,15 @@
 		<script src="assets/js/ie/respond.min.js"></script>
 		<script src="assets/js/ie/excanvas.js"></script>
 	<![endif]-->
+	<script>
+		requiredSkills = [];
+		skillProfiles = [];
+		skillsList = [];
+		{% for skill in site.data.skills.names %}
+			skillsList.push("{{skill}}");
+		{% endfor %}
+
+	</script>
+
+
 </head>

@@ -24,6 +24,10 @@
 <script src="/assets/js/cookies.js"></script>
 <script src="/assets/js/roles.js"></script>
 
+<!-- type head -->
+<script src="/assets/js/typehead/typeahead.bundle.min.js"></script>
+<script src="/assets/js/typehead/demo.js"></script>
+
 <script>
   $("#groups input[type='checkbox']:checked ").change(function(){
   	var app = $('#applicants:checked').length > 0;
@@ -39,4 +43,85 @@
 		$(".internal-false").hide();
 	}
   });
+
+  $(function(){
+  	// update required skills based on value of slider
+    //
+    sliderUpdate = function(ev){
+      var value = ev.value;
+      var id = ($(ev.target).attr("data-slider-skill"));
+      requiredSkills[0] = value;
+      sortListBySkill();
+    }; 
+     
+  	$("input[data-slider-value]").on('slideStop', function(ev){
+      sliderUpdate(ev);
+    });
+
+
+
+    function calculateMatch(requirements, profile){
+      var possiblePoints=0;
+      var profilePoints = 0;
+      for (var i = requirements.length - 1; i >= 0; i--) {
+        if(requirements[i]){
+          if (profile[i]){
+            if(profile[i]<requirements[i]){
+              profilePoints += profile[i];
+            }else{
+              profilePoints += profile[i] - (profile[i]-requirements[i]);
+            }
+          }
+          possiblePoints += requirements[i];
+          // console.log(profilePoints, possiblePoints);
+        }
+      }
+      // console.log(requirements, possiblePoints);
+      // console.log("profile", profile, profilePoints);
+      // console.log(possiblePoints - profilePoints, possiblePoints);
+      return Math.floor(((profilePoints)/possiblePoints)*100);
+    }
+
+  	// calculate skill value
+    window.sortListBySkill = function(){ 
+    	for (var i = userList.items.length-1; i >= 0; i--) {
+        var values = userList.items[i].values();
+        if(values.applicantId){
+            // console.log(values.name, skillProfiles[values.applicantId]);
+            var skillMatch = calculateMatch(requiredSkills, skillProfiles[values.applicantId]);
+            values.skillMatch = '<div class="progress progress-xs m-t-xs m-b-none skillMatch"><div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="'+skillMatch+'%" style="width:'+skillMatch+'%"></div></div>';
+            userList.items[i].values(values);
+        }
+      }
+      userList.sort('skillMatch', { order: "desc" });
+    }
+    sortListBySkill();
+    $("#skilltypehead").toggle();
+  
+
+    //add skill menu
+    $(".fa-plus").click(function(){
+      $("#typehead").val("");
+      $("#skilltypehead").toggle();
+    })
+
+
+    //add skills
+    $(".tt-dropdown-menu").click(function(){
+      var skill = $("#typehead").val();
+      var index = skillsList.indexOf(skill);
+      if(!requiredSkills[index]){
+        var index = skillsList.indexOf(skill);
+        var slider = '<input class="slider slider-horizontal form-control" type="text" value="" data-slider-skill="'+index+'"data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal">';
+        var html = "<li class='list-group-item'>"+skill+slider +"</li>";
+        $("ul#skills").append(html);
+        $("[data-slider-skill="+index+"]").slider().on('slideStop', function(ev){
+          sliderUpdate(ev);
+        });
+      }
+      $("#skilltypehead").toggle();
+    });
+  });
+
+  
 </script>
