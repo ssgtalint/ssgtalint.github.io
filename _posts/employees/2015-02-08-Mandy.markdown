@@ -19,5 +19,4 @@ additionalSkills:
 - fooo
 - bar
 manage: false
-"pay grade": 400
 ---
