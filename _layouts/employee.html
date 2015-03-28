@@ -12,9 +12,9 @@ layout: default
           <!-- <p>
           <strong>{{page.position}}</strong>
           </p> -->
-          <p><i class="fa fa-lg fa-circle text-primary m-r-sm" style="font-size:.8rem; position:relative; left:.5rem;bottom:.1rem;"></i><strong>verified by manager 1/1/11</strong></p>
+          <p><i class="fa fa-lg fa-circle text-primary m-r-sm" style="font-size:.8rem; position:relative; left:.5rem;bottom:.1rem;"></i><strong>verified by <a href="/employees/Olivia-jackson">manager</a> 1/1/11</strong></p>
 
-          <a href="#" for="filestyle-0" class="btn btn-s-md btn-primary">Hire</a>
+          <a href="#" for="filestyle-0" class="btn btn-s-md btn-primary">Request profile update</a>
           <!-- <a href="#" class="btn btn-s-md btn-default">edit</a> -->
           <a href="#" class="btn btn-s-md btn-default">add to contacts</a>
         </div>                 
@@ -45,8 +45,17 @@ layout: default
       </div>
       <div class="row m-b">
         <div class="col-xs-6">
-          <small>Manager</small>
-          <div class="text-lt font-bold">Coch Jose</div>
+          <small>Manager</small><br>
+
+          {% if page.title == "Olivia Jackson" %}
+            <a class="text-lt font-bold" href="/employees/Daniel-Gomez">Daniel Gomez</a>
+          {% elsif page.title == "Daniel Gomez"%}
+            <a class="text-lt font-bold" href="/employees/Michael-Sanchez">Michael Sanchez</a>
+          {% elsif page.title == "Michael Sanchez"%}
+            <a class="text-lt font-bold" href="/employees/Michael-Sanchez">NA</a>
+          {%else%}
+            <a href="/employees/Olivia-jackson" class="text-lt font-bold">Olivia Jackson</a>  
+          {% endif %}
         </div>
         <div class="col-xs-6">
           <small>location</small>
@@ -68,10 +77,29 @@ layout: default
         <a class="text-lt font-bold" href="#">Linkdin</a>
       </div>
       <br><br>
+      <div>
+        <small>Chain of command</small><br>
+        {% if page.title == "Olivia Jackson" %}
+            <a class="text-lt font-bold" href="/employees/Michael-Sanchez">1. Michael Sanchez</a><br>
+        <a class="text-lt font-bold" href="/employees/Daniel-Gomez">2. Daniel Gomez</a> <br>
+        <a class="text-lt font-bold" href="/employees/Olivia-jackson">3. Olivia Jackson</a> <br>
+          {% elsif page.title == "Daniel Gomez"%}
+            <a class="text-lt font-bold" href="/employees/Michael-Sanchez">1. Michael Sanchez</a><br>
+        <a class="text-lt font-bold" href="/employees/Daniel-Gomez">2. Daniel Gomez</a> <br>
+          {% elsif page.title == "Michael Sanchez"%}
+            <a class="text-lt font-bold" href="/employees/Michael-Sanchez">1. Michael Sanchez</a><br>
+          {%else%}
+            <a class="text-lt font-bold" href="/employees/Michael-Sanchez">1. Michael Sanchez</a><br>
+        <a class="text-lt font-bold" href="/employees/Daniel-Gomez">2. Daniel Gomez</a> <br>
+        <a class="text-lt font-bold" href="/employees/Olivia-jackson">3. Olivia Jackson</a> <br>
+        <a class="text-lt font-bold" href="/employees/Olivia-jackson">4. {{page.title}}</a> <br>
+          {% endif %}
+      </div>
+      <br><br>
         </div>
 
         <div class="col-md-6">
-          {% include skills.html %}
+          {% include skillsStatic.html %}
         </div>
         </div>
       </div>

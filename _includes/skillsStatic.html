@@ -1,0 +1,17 @@
+{% assign skills = site.data.skills.skillsets[page.skillsid] %} 
+{% assign skillNames = site.data.skills.names %} 
+
+<h4>Skill profile {{page.skillsid}}</h4>
+<br>
+{% for skill in skills %}
+  <li class="list-group-item">
+  	{{skillNames[skill.id]}} <br>
+   	{% for i in (1..10) %}
+   		{% if i <= skill.rank %} 
+   		    <i class="i i-circle-sm text" style="color:#177bbb"></i>
+   		{% else %}
+   			<i class="i i-circle-sm-o text"></i>
+   		{% endif %}
+   	{% endfor %}
+  </li>
+{% endfor %}
