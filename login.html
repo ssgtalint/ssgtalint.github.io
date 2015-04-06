@@ -38,9 +38,18 @@ route: login
 				if (error) {
 					console.log(error);
 				} else {
-					// User is logged in, save result.token in session
+					id = result.user_id;
 					setCookie("ua_session_token", result.token, 1);
-					location = "/";
+					
+					UserApp.User.get({"user_id": id}, function(error, result){
+						console.log(error);
+						if(!error){
+							
+							setCookie("account_type", result[0].properties.user_type.value, 1);
+							location = '/';
+						}
+					});
+
 				}
 			}
 		);

@@ -31,6 +31,7 @@ route: signup
 </form>
 
 <script>
+	
 	createAccount = function(e){
 		var data = $('form').serializeArray();
 		UserApp.User.save({
@@ -60,6 +61,7 @@ route: signup
 						} else {
 							// User is logged in, save result.token in session
 							setCookie("ua_session_token", result.token, 1);
+							setCookie("account_type", data[3].value, 1);
 							location = "/";
 						}
 					}

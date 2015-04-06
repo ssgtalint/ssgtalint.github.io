@@ -7,7 +7,8 @@ route: logout
 	UserApp.User.logout(function(error, result){
     	// Clear cookie, redirect to login page, etc.
     	eraseCookie("ua_session_token");
-    	location = "/login";
+    	eraseCookie("account_type");
+    	location = "/login/";
 	});
 
 </script>
