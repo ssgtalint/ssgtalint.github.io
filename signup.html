@@ -9,17 +9,16 @@ route: signup
 <h1 style="text-align:center">signup</h1>
 <form onsubmit="createAccount(); return false;" style="width: 400px;margin: auto;">
 	<label for="login">login</label> <br>
-	<input type="text" id="login" name="login" > <br><br>
+	<input type="text" id="login" name="login" value="test"> <br><br>
 
 	<label for="email">email</label> <br>
-	<input type="email" id="email" name="email"> <br><br>
+	<input type="email" id="email" name="email" value="test@gmail.com"> <br><br>
 
 	<label for="password">password</label> <br>
-	<input type="password" id="password"  name="password"><br><br>	
+	<input type="password" id="password"  name="password" value="12345"><br><br>	
 
 	<label for="type">Account type</label> <br>
 	<select name="type" id="type">
-		<option value="admin">admin</option>
 		<option value="hr">hr</option>
 		<option value="employee">employee</option>
 		<option value="manager">manager</option>
@@ -27,6 +26,8 @@ route: signup
 	<br> <br> <br>
 	
 	<input type="submit" value="create account">
+	<br><br><br>
+	<p id="signuperror"></p>
 </form>
 
 <script>
@@ -46,24 +47,25 @@ route: signup
 		   console.log(error);
 		   console.log(result);
 
-		   UserApp.User.login({
-			"login": data[0].value,
-			"password": data[2].value
-			}, 
-			function(error, result) {
-				if (error) {
-					console.log(error);
-				} else {
-					// User is logged in, save result.token in session
-					setCookie("ua_session_token", result.token, 1);
-					location = "/";
-				}
+			if(error){
+				$("#signuperror").html(error.message);
+			}else{
+				UserApp.User.login({
+					"login": data[0].value,
+					"password": data[2].value
+					}, 
+					function(error, result) {
+						if (error) {
+							$("#signuperror").html(error.message);
+						} else {
+							// User is logged in, save result.token in session
+							setCookie("ua_session_token", result.token, 1);
+							location = "/";
+						}
+					}
+				);
 			}
-		);
 
-		   if(error == null){
-		   		location.href = "/index.html";
-		   }
 		});
 	}
 </script>
