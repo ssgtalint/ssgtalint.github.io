@@ -1,0 +1,16 @@
+---
+layout: basic
+route: logout
+---             
+<script>
+
+	UserApp.User.logout(function(error, result){
+    	// Clear cookie, redirect to login page, etc.
+    	eraseCookie("ua_session_token");
+    	location = "/login";
+	});
+
+</script>
+
+
+

@@ -22,6 +22,8 @@
 		<script src="assets/js/ie/respond.min.js"></script>
 		<script src="assets/js/ie/excanvas.js"></script>
 	<![endif]-->
+
+	<script src="/assets/js/jquery.min.js"></script>
 	<script>
 		requiredSkills = [];
 		skillProfiles = [];
@@ -29,8 +31,16 @@
 		{% for skill in site.data.skills.names %}
 			skillsList.push("{{skill}}");
 		{% endfor %}
-
 	</script>
+
+	<script src="https://app.userapp.io/js/userapp.client.js"></script>
+	<script>
+		UserApp.initialize({ appId: "5519948350a60" });
+	</script>
+
+
+	<script src="/assets/js/cookies.js"></script>
+	<script src="/assets/js/protectAccess.js"></script>
 
 
 </head>

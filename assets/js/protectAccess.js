@@ -1,0 +1,24 @@
+$.holdReady( true );
+$.getScript( "myplugin.js", function() {
+  $.holdReady( false );
+});
+
+
+var token = getCookie("ua_session_token");
+
+if(token){
+	UserApp.setToken(token);
+
+
+	UserApp.User.get({ user_id: "self" }, function(error, user) {
+        if (error) {
+            // The token has probably expired, go to the login page
+            window.location.href = "/login";
+        } else {
+            // Success, the profile is at user[0]
+        }
+    });
+}else {
+	// No, redirect the user to the login page
+    if(location.pathname != '/login/'){ location.href = "/login";}
+}

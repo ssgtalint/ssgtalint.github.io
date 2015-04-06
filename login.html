@@ -2,14 +2,46 @@
 layout: basic
 route: login
 ---             
-                  
+<style>
+	label{width:100%;}
+	input{width:100%;}
+</style>            
 <br>
-<h1 style="text-align:center">login as a</h1>
-<div style="margin:auto; display:block; width:270px;">
-	<button type="button" onclick="eraseCookie('account_type'); setCookie('account_type', 'hr', 1);window.location.href = '/';" class="btn btn-default">HR rep</button>
-	<button type="button" onclick="eraseCookie('account_type'); setCookie('account_type', 'manager', 1);window.location.href = '/';" class="btn btn-default">manager</button>
-	<button type="button" onclick="eraseCookie('account_type'); setCookie('account_type', 'employee', 1);window.location.href = '/';" class="btn btn-default">employee</button>
-</div>
+<h1 style="text-align:center">login</h1>
+<form onsubmit="createAccount(); return false;" style="width: 400px;margin: auto;">
+	<label for="login">first name</label> <br>
+	<input type="text" id="login" name="login" value="John"> <br><br>	
+	<label for="password">password</label> <br>
+	<input type="password" id="password" value="12345" name="password"><br><br>	<br>	
+	<!-- <select name="type" id="type">
+		<option value="admin">admin</option>
+		<option value="hr">hr</option>
+		<option value="employee">employee</option>
+		<option value="manager">manager</option>
+	</select> -->
+	
+	<input type="submit" value="sign in">
+</form>
+
+<script>
+	createAccount = function(e){
+		var data = $('form').serializeArray();
+		UserApp.User.login({
+			"login": data[0].value,
+			"password": data[1].value
+			}, 
+			function(error, result) {
+				if (error) {
+					console.log(error);
+				} else {
+					// User is logged in, save result.token in session
+					setCookie("ua_session_token", result.token, 1);
+					location = "/";
+				}
+			}
+		);
+	};
+</script>
 
 
 
