@@ -3,24 +3,28 @@ layout: basic
 route: signup
 ---             
 <style>
-	label{width:100%;}
-	input{width:100%;}
+	label, input, select{width:100%;}
 </style>            
 <br>
 <h1 style="text-align:center">signup</h1>
 <form onsubmit="createAccount(); return false;" style="width: 400px;margin: auto;">
-	<label for="fName">first name</label> <br>
-	<input type="text" id="fName" name="fName" value="John"> <br><br>	
+	<label for="login">login</label> <br>
+	<input type="text" id="login" name="login" > <br><br>
+
 	<label for="email">email</label> <br>
-	<input type="email" id="email" name="email" value="nwpointer@gmail.com"> <br><br>
+	<input type="email" id="email" name="email"> <br><br>
+
 	<label for="password">password</label> <br>
-	<input type="password" id="password" value="12345" name="password"><br><br>	<br>	
-	<!-- <select name="type" id="type">
+	<input type="password" id="password"  name="password"><br><br>	
+
+	<label for="type">Account type</label> <br>
+	<select name="type" id="type">
 		<option value="admin">admin</option>
 		<option value="hr">hr</option>
 		<option value="employee">employee</option>
 		<option value="manager">manager</option>
-	</select> -->
+	</select>
+	<br> <br> <br>
 	
 	<input type="submit" value="create account">
 </form>
@@ -28,21 +32,38 @@ route: signup
 <script>
 	createAccount = function(e){
 		var data = $('form').serializeArray();
-		console.log(data[0].value);
 		UserApp.User.save({
-		    "first_name": data[0].value,
-		    "email": data[1].value,
 		    "login": data[0].value,
+		    "email": data[1].value,
 		    "password": data[2].value,
 		    "properties": {
 		        "user_type": {
-		            "value": "manager",
+		            "value": data[3].value,
 		            "override": true
 		        }
 		    }
 		}, function(error, result){
 		   console.log(error);
 		   console.log(result);
+
+		   UserApp.User.login({
+			"login": data[0].value,
+			"password": data[2].value
+			}, 
+			function(error, result) {
+				if (error) {
+					console.log(error);
+				} else {
+					// User is logged in, save result.token in session
+					setCookie("ua_session_token", result.token, 1);
+					location = "/";
+				}
+			}
+		);
+
+		   if(error == null){
+		   		location.href = "/index.html";
+		   }
 		});
 	}
 </script>

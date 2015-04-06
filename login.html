@@ -9,7 +9,7 @@ route: login
 <br>
 <h1 style="text-align:center">login</h1>
 <form onsubmit="createAccount(); return false;" style="width: 400px;margin: auto;">
-	<label for="login">first name</label> <br>
+	<label for="login">login</label> <br>
 	<input type="text" id="login" name="login" value="John"> <br><br>	
 	<label for="password">password</label> <br>
 	<input type="password" id="password" value="12345" name="password"><br><br>	<br>	
@@ -21,7 +21,11 @@ route: login
 	</select> -->
 	
 	<input type="submit" value="sign in">
+	<br><br>
+	<p> or <a href="/signup">signup here</a></p>
 </form>
+
+
 
 <script>
 	createAccount = function(e){
