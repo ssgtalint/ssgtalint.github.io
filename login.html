@@ -23,6 +23,8 @@ route: login
 	<input type="submit" value="sign in">
 	<br><br>
 	<p> or <a href="/signup">signup here</a></p>
+	
+	<p id="signuperror"></p>
 </form>
 
 
@@ -36,17 +38,19 @@ route: login
 			}, 
 			function(error, result) {
 				if (error) {
-					console.log(error);
+					$("#signuperror").html(error.message);
 				} else {
 					id = result.user_id;
 					setCookie("ua_session_token", result.token, 1);
 					
 					UserApp.User.get({"user_id": id}, function(error, result){
-						console.log(error);
+	
 						if(!error){
 							
 							setCookie("account_type", result[0].properties.user_type.value, 1);
 							location = '/';
+						}else{
+							$("#signuperror").html(error.message);
 						}
 					});
 
