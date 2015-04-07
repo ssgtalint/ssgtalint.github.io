@@ -3,32 +3,46 @@ layout: unrestricted
 route: signup
 ---             
 <style>
-	label, input, select{width:100%;}
-</style>            
+	label{width:100%;}
+	input{width:100%;}
+	.panel-default{max-width: 450px; margin:auto;}
+</style>          
 <br>
-<h1 style="text-align:center">signup</h1>
+<h1 style="text-align:center">signup</h1><br>
+<section class="panel panel-default">
+<div class="panel-body"> <br>
 <form onsubmit="createAccount(); return false;" style="width: 400px;margin: auto;">
-	<label for="login">login</label> <br>
-	<input type="text" id="login" name="login" value="test"> <br><br>
+	<div class="form-group">
+		<label for="login">login</label> <br>
+		<input class="form-control" type="text" id="login" name="login" value="test">
+	</div> 
 
-	<label for="email">email</label> <br>
-	<input type="email" id="email" name="email" value="test@gmail.com"> <br><br>
+	<div class="form-group">
+		<label for="email">email</label> <br>
+		<input class="form-control" type="email" id="email" name="email" value="test@gmail.com">
+	</div> 
 
-	<label for="password">password</label> <br>
-	<input type="password" id="password"  name="password" value="12345"><br><br>	
+	<div class="form-group">
+		<label for="password">password</label> <br>
+		<input class="form-control" type="password" id="password"  name="password" value="12345">
+	</div>	
 
-	<label for="type">Account type</label> <br>
-	<select name="type" id="type">
-		<option value="hr">hr</option>
-		<option value="employee">employee</option>
-		<option value="manager">manager</option>
-	</select>
-	<br> <br> <br>
+	<div class="form-group">
+		<label for="type">Account type</label> <br>
+		<select name="type" id="type" class="form-control">
+			<option value="hr">hr</option>
+			<option value="employee">employee</option>
+			<option value="manager">manager</option>
+		</select>
+	</div>
+	<br>
 	
-	<input type="submit" value="create account">
-	<br><br><br>
-	<p id="signuperror"></p>
+	<input type="submit" value="create account" class="btn btn-lg btn-success">
+	<br><br>
+	<p id="signuperror"></p><br>
 </form>
+</div>
+</section>
 
 <script>
 	
