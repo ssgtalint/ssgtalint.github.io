@@ -3,6 +3,10 @@
 // employee-only
 
 // console.log(getCookie("account_type"));
+// 
+if(getCookie("account_type") == 'hr' || getCookie("account_type") == 'manager' || getCookie("account_type") == 'employee'){
+	$('.restricted').show();
+}
 
 if(getCookie("account_type") != 'hr'){
 	$('.hr-only').hide();
