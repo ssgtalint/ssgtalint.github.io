@@ -8,7 +8,7 @@ if(token){
 	UserApp.User.get({ user_id: "self" }, function(error, user) {
         if (error) {
             // The token has probably expired, go to the login page
-            if(!(location.pathname == '/login/' || location.pathname == '/signup/')){
+            if(!(location.pathname == '/login/' || location.pathname == '/signup/' || location.pathname == '/logout/')){
                 alert(error.message);
                 window.location.href = "/login/";
             }
