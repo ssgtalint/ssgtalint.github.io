@@ -1,11 +1,11 @@
 {% assign skills = site.data.skills.skillsets[page.skillsid] %} 
 {% assign skillNames = site.data.skills.names %} 
 
-<h4>Skill profile {{page.skillsid}}</h4>
+<h4>{{page.title}}'s skill profile</h4>
 <br>
 {% for skill in skills %}
   <li class="list-group-item">
-  	{{skillNames[skill.id]}} <br>
+  	{{skillNames[skill.id].name}} <br>
    	{% for i in (1..10) %}
    		{% if i <= skill.rank %} 
    		    <i class="i i-circle-sm text" style="color:#177bbb"></i>

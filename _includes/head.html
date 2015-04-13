@@ -28,9 +28,26 @@
 		requiredSkills = [];
 		skillProfiles = [];
 		skillsList = [];
-		{% for skill in site.data.skills.names %}
-			skillsList.push("{{skill}}");
+		groups = [];
+		skillsByGroup = [];
+		compare = [];
+		{% for g in site.data.skills.groups  %}
+			groups.push("{{g}}");
+			skillsByGroup.push([]);
 		{% endfor %}
+		{% for s in site.data.skills.names  %}
+			{% for g in site.data.skills.groups  %}
+				if("{{s.group}}" =="{{forloop.index}}"){
+					var i = parseInt("{{forloop.index}}")-1;
+					skillsByGroup[i].push("{{s.name}}");
+				}
+			{% endfor %}
+		{% endfor %}
+		{% for skill in site.data.skills.names %}
+			skillsList.push("{{skill.name}}");
+		{% endfor %}
+
+
 	</script>
 
 	<script src="https://app.userapp.io/js/userapp.client.js"></script>

@@ -29,13 +29,13 @@
 			  			</div>
 			  			<div class="col-xs-8">
 			  				<div class="pull-right">
-					    	<select class="input-sm form-control input-s-sm inline v-middle">
-						      <option value="0">Bulk action</option>
+					    	<select id="filter-action" class="input-sm form-control input-s-sm inline v-middle">
+					    	  <option value="2">Compare</option>
+						      <!-- <option value="0">Bulk action</option>
 						      <option value="1">Send update request</option>
-						      <option value="2">Compare</option>
-						      <option value="3">Add to my contacts</option>
+						      <option value="3">Add to my contacts</option> -->
 						    </select>
-						    <button class="btn btn-sm btn-default">Apply</button> 
+						    <button onclick ="window.respondtofilteraction()"class="btn btn-sm btn-default">Apply</button> 
 			  			</div>
 			  		</div>
 			  	</header>
@@ -84,9 +84,10 @@
 							    	{% else %}
 										{{post[field]}}
 							    {%endcase%}
+							    <div id="compare-content" style="display:none" > asfsdfd</div>
 							    </td>
 							{% endfor %}
-							<th  width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input type="checkbox"><i></i></label></th>
+							<th width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input class="filter-checkbox" id="foo" type="checkbox" sid="{{forloop.index}}" ename="{{post.title}}" url="{{post.url}}"><i class="filter-check"></i></label></th>
 						</tr>
 						<script>
 							{% assign skills = site.data.skills.skillsets[post.skillsid] %}

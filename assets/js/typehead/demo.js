@@ -25,17 +25,17 @@
         cb(matches);
       };
     };
-     
-    $('#typehead').typeahead({
-      hint: true,
-      highlight: true,
-      minLength: 1
-    },
-    {
-      name: 'states',
-      displayKey: 'value',
-      source: substringMatcher(skillsList)
-    });
-
+    for (var i = groups.length; i >= 1; i--) {
+      $('#typehead' + i).typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+      },
+      {
+        name: 'states',
+        displayKey: 'value',
+        source: substringMatcher(skillsByGroup[i-1])
+      });
+    };
   });
 }(window.jQuery);

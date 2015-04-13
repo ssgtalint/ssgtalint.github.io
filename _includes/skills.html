@@ -1,36 +1,51 @@
 {% assign skills = site.data.skills.skillsets[page.skillsid] %} 
 {% assign skillNames = site.data.skills.names %} 
-
+{% assign groups = site.data.skills.groups %}
   
 {% if skills.size %}
+{% for g in groups %}
+{% assign gid = forloop.index %}
+
   <div class="panel b-a" id="skills">
       <div class="panel-heading b-b">
         
         <button class="btn btn-clear pull-right" data-toggle="button" >
-          <span class="text" data-toggle="collapse" data-target="#skills">
+          <span class="text" data-toggle="collapse" data-target="#skills-{{g | remove: " " | remove: "&" | remove: "," | remove: "."}}">
             <i class="fa fa-chevron-right rotate90"></i> 
           </span>
-          <span class="text-active" data-toggle="collapse" data-target="#skills">
+          <span class="text-active" data-toggle="collapse" data-target="#skills-{{g | remove: " " | remove: "&" | remove: "," | remove: "."}}">
             <i class="fa fa-chevron-right "></i>
           </span>
         </button>
-        <button class="btn btn-clear pull-right secondary-drop-button" >
+        <button class="btn btn-clear pull-right secondary-drop-button">
           <i class="fa fa-plus pull-right"></i>
         </button>
         
-        <a href="#" id="skillsheader" class="font-bold">Skills</a>
+        <a href="#" id="skillsheader" class="font-bold">{{g}}</a>
         
       </div>
 
-        <ul id="skills" class="collapse in list-group no-radius">
-        <li class="list-group-item" id="skilltypehead" ><input type="text" class="form-control" id="typehead" placeholder="add skill"></li>
+        <ul id="skills-{{g | remove: " " | remove: "&" | remove: "," | remove: "."}}" class="collapse in list-group no-radius">
+        <li class="list-group-item skilltypehead"><input type="text" class="form-control" id="typehead{{gid}}" placeholder="add skill"></li>
         {% for skill in skills %}
-          <li class="list-group-item">{{skillNames[skill.id]}}
+        {% if gid == skillNames[skill.id].group %}
+            <li class="list-group-item">
+            {{skillNames[skill.id].name}}
+            <span style="display:none;"> {{skill.rank}}/10</span>
             {% include skillSlider.html %}
+            <div class="row scale">
+              <div class="col-sm-4 col-xs-6">low skill</div>
+              <div class="col-xs-4 hidden-xs" style="text-align:center">medium</div>
+              <div class="col-sm-4 col-xs-6" style="text-align:right">high skill</div>
+            </div>
           </li>
+        {% endif %}
         {% endfor %}
         </ul>
   </div>
+  
+{% endfor %}
+  
 
 {% else %}  
     <div class="panel b-a">

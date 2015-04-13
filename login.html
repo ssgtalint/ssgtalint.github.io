@@ -36,6 +36,11 @@ route: login
 
 
 <script>
+	UserApp.User.logout(function(error, result){
+    	// Clear cookie, redirect to login page, etc.
+    	eraseCookie("ua_session_token");
+    	eraseCookie("account_type");
+	});
 	createAccount = function(e){
 		var data = $('form').serializeArray();
 		UserApp.User.login({

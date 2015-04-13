@@ -129,3 +129,16 @@ table img{
 .not-employee{
 	display: none;
 }*/
+#skills .list-group-item .scale {
+	display: none;
+	font-size: 80%;
+	color:rgba(0,0,0,.3);
+}
+#skills .list-group-item:hover .scale { display: block; }
+
+
+@media (min-width: 768px)
+	#myModal .modal-dialog {
+	  width: 900px !important;
+	  margin: 30px auto !important;
+}

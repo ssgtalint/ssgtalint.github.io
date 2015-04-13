@@ -44,19 +44,79 @@
   });
 
   $(function(){
+    // filter actions
+    window.respondtofilteraction = function(){
+      if($("#filter-action").val() == 2){
+        $('#myModal').modal('toggle');
+      }
+    }
+
+    // queries employee page for skills information and calls insert after its gathered at most 3 employees from the global compare list
+    updateCompareModal = function(){
+      c = 0; //limits to 3 records
+      d = 0; //keeps it from printing untill last record added
+      html = "";
+      for (var i = compare.length - 1; i >= 0; i--) {
+        if(typeof(compare[i]) != "undefined" && compare[i].constructor === Array && c<3){
+          c++;
+          index = i;
+          $.ajax({
+            url: compare[i][1],
+            success: function(response) {
+              d++
+              foo = $(response).find("#employee-skill-profile");
+              html += '<div class="col-md-4">' + foo.html() + '</div>';
+              if (c==d){
+                insertCompareModalHtml(html);
+              }
+            }
+          });
+        }
+      };
+    }
+
+
+    //changes content of comparison modal window
+    insertCompareModalHtml = function(html){
+      html = '<section class="row">' + html + "</section>";
+      $("#myModal .modal-body").html(html);
+    }
+
+
+    // filter check box response
+    $(".filter-checkbox").change(function(ev){
+      self = $(ev.target);
+      self.toggleClass("selected")
+      i = self.attr("sid");
+      if (self.hasClass("selected")){
+        arr = [self.attr("ename"), self.attr("url")];
+        compare[i] = arr;
+        console.log(compare);
+        updateCompareModal();
+      }else{
+        delete compare[i];
+        console.log(compare);
+        updateCompareModal();
+      }
+    });
+
+
+
+
+
   	// update required skills based on value of slider
     //
     sliderUpdate = function(ev){
       var value = ev.value;
       var id = ($(ev.target).attr("data-slider-skill"));
       requiredSkills[0] = value;
+      $(ev.target).parent().parent().find('span').html(" "+ value + "/10");
       sortListBySkill();
     }; 
      
   	$("input[data-slider-value]").on('slideStop', function(ev){
       sliderUpdate(ev);
     });
-
 
 
     function calculateMatch(requirements, profile){
@@ -78,8 +138,11 @@
       // console.log(requirements, possiblePoints);
       // console.log("profile", profile, profilePoints);
       // console.log(possiblePoints - profilePoints, possiblePoints);
+      console.log(requirements);
+      console.log(Math.floor(((profilePoints)/possiblePoints)*100));
       return Math.floor(((profilePoints)/possiblePoints)*100);
     }
+    // calculateMatch();
 
   	// calculate skill value
     window.sortListBySkill = function(){ 
@@ -87,6 +150,7 @@
         var values = userList.items[i].values();
         if(values.applicantId){
             // console.log(values.name, skillProfiles[values.applicantId]);
+            // console.log(requiredSkills);
             var skillMatch = calculateMatch(requiredSkills, skillProfiles[values.applicantId]);
             values.skillMatch = '<div class="progress progress-xs m-t-xs m-b-none skillMatch"><div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="'+skillMatch+'%" style="width:'+skillMatch+'%"></div></div>';
             userList.items[i].values(values);
@@ -95,30 +159,42 @@
       userList.sort('skillMatch', { order: "desc" });
     }
     sortListBySkill();
-    $("#skilltypehead").toggle();
+    $(".skilltypehead").toggle();
+
+    // window.toggleSkillPanel = function(el){
+    //   $(el).parent().parent().find("ul").toggle();
+    // };
+    // 
+    
   
 
     //add skill menu
-    $(".fa-plus").click(function(){
-      $("#typehead").val("");
-      $("#skilltypehead").toggle();
+    $(".fa-plus").click(function(ev){
+      $(ev.target).parent().parent().parent().find(".skilltypehead").toggle();
+      $('[id^="typehead"], [id*=" typehead"]').val("");
+      // $(".skilltypehead").parent.parend.toggle();
     })
 
 
     //add skills
-    $(".tt-dropdown-menu").click(function(){
-      var skill = $("#typehead").val();
+    $(".tt-dropdown-menu").click(function(ev){
+      var thisList = $(ev.target).parent().parent().parent().parent().parent().parent().parent();
+      var typehead = thisList.find('[id^="typehead"], [id*=" typehead"]');
+      var skill = typehead.val();
       var index = skillsList.indexOf(skill);
       if(!requiredSkills[index]){
         var index = skillsList.indexOf(skill);
+        console.log(index);
         var slider = '<input class="slider slider-horizontal form-control" type="text" value="" data-slider-skill="'+index+'"data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal">';
-        var html = "<li class='list-group-item'>"+skill+slider +"</li>";
-        $("ul#skills").append(html);
+        var scale ='<div class="row scale"><div class="col-sm-4 col-xs-6">low skill</div><div class="col-xs-4 hidden-xs" style="text-align:center">medium</div><div class="col-sm-4 col-xs-6" style="text-align:right">high skill</div></div>';
+
+        var html = "<li class='list-group-item'>"+skill+slider+scale+"</li>";
+        thisList.append(html);
         $("[data-slider-skill="+index+"]").slider().on('slideStop', function(ev){
           sliderUpdate(ev);
         });
       }
-      $("#skilltypehead").toggle();
+      thisList.find(".skilltypehead").toggle();
     });
   });
 
