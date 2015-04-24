@@ -1,7 +1,7 @@
 ---
 layout: employee
 skillsid: 0
-permalink: /:categories/:year/:month/:day/:title.html
+permalink: /:categories/:title.html
 title: "Mandy Esquire"
 location: Portland
 position: "Sales Manager"
