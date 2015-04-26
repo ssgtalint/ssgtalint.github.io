@@ -23,19 +23,51 @@ route: login
 	</div> <br>
 	
 	<input type="submit" value="sign in" class="btn btn-lg btn-success">
-	<br><br>
+	<br>
 	
 	<p style="text-align:center" id="signuperror"></p>
 	
 </form>
 </div>
+<input type="submit" value="or use google" class="btn btn-lg" onclick="oauth()">
 </section>
 <br>
+
 <p style="text-align:center"> or <a href="/signup">signup here</a></p>
 
 
 
 <script>
+	function getQueryParams(qs) {
+	    qs = qs.split("+").join(" ");
+	    var params = {}, tokens,
+	        re = /[?&]?([^=]+)=([^&]*)/g;
+	    while (tokens = re.exec(qs)) {
+	        params[decodeURIComponent(tokens[1])]
+	            = decodeURIComponent(tokens[2]);
+	    }
+	    return params;
+	}
+
+	var query = getQueryParams(document.location.search);
+	if (query.ua_token != undefined){
+		setCookie("ua_session_token", query.ua_token, 1);
+		setCookie("account_type", "manager", 1);
+		location = '/';
+	}
+
+
+	oauth = function(){
+		UserApp.OAuth.getAuthorizationUrl({ provider_id: 'google', redirect_uri: 'http://localhost:4000/login/' }, 
+			function(error, result) {
+				if (!error) {
+					window.location.href = result.authorization_url;
+				}
+			}
+		);
+	}
+
+
 	UserApp.User.logout(function(error, result){
     	// Clear cookie, redirect to login page, etc.
     	eraseCookie("ua_session_token");
@@ -53,6 +85,7 @@ route: login
 				} else {
 					id = result.user_id;
 					setCookie("ua_session_token", result.token, 1);
+
 					
 					UserApp.User.get({"user_id": id}, function(error, result){
 	

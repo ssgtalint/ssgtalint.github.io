@@ -39,14 +39,24 @@ route: signup
 	<br>
 	
 	<input type="submit" value="create account" class="btn btn-lg btn-success">
-	<br><br>
+	<br>
 	<p id="signuperror"></p><br>
 </form>
 </div>
+
+<input type="submit" value="or use google" class="btn btn-lg" onclick="oauth()">
 </section>
 
 <script>
-	
+	oauth = function(){
+		UserApp.OAuth.getAuthorizationUrl({ provider_id: 'google', redirect_uri: 'http://localhost:4000/verify' }, 
+			function(error, result) {
+				if (!error) {
+					window.location.href = result.authorization_url;
+				}
+			}
+		);
+	}
 	createAccount = function(e){
 		var data = $('form').serializeArray();
 		UserApp.User.save({
