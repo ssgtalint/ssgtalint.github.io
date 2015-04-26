@@ -1,18 +1,24 @@
 ---
 layout: employee
-skillsid: 2
-title:  "Mark"
-date:   2015-02-08 10:38:43
+skillsid: 0
+title: "Mandy Esquire"
 location: Portland
-skillMatch: 90
+position: "Sales Manager"
+skillMatch: 20
 availability: 10
-internal: false
+internal: true
 categories: 
 - employees
 phoneNumber: 555-555-5555
 email: nwpointer@gmail.com
+coreSkills:
+- math
+- foo
+additionalSkills:
+- fooo
+- bar
 manage: false
-"pay grade": 20
+"pay grade": 400
 ---
 
 this is the portfolio of mark

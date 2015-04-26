@@ -3,7 +3,6 @@ layout: employee
 skillsid: 2
 title:  "sally myer"
 date:   2015-02-08 10:38:43
-permalink: /employees/:title
 position: "Sales Manager"
 location: "Tampa, Florida"
 internal: true

@@ -1,9 +1,9 @@
 ---
 layout: employee
 skillsid: 0
+permalink: /:categories/:title.html
 title: "Mandy Esquire"
-permalink: /employees/:title
-location: Portland
+location: Seatle
 position: "Sales Manager"
 skillMatch: 20
 availability: 10
