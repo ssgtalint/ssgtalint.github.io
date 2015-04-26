@@ -1,5 +1,7 @@
 ---
 layout: employee
+username: mandy2
+permalink: /:categories/:title
 skillsid: 0
 title: "Mandy Esquire"
 location: Portland

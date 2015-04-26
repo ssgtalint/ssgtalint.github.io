@@ -1,5 +1,7 @@
 ---
 layout: employee
+username: markpdx
+permalink: /:categories/:title
 skillsid: 2
 title:  "Mark"
 date:   2015-02-08 10:38:43
@@ -11,7 +13,7 @@ categories:
 - employees
 phoneNumber: 555-555-5555
 email: nwpointer@gmail.com
-manage: false
+manage: true
 "pay grade": 20
 ---
 

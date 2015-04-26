@@ -41,12 +41,22 @@ route: signup
 	<input type="submit" value="create account" class="btn btn-lg btn-success">
 	<br><br>
 	<p id="signuperror"></p><br>
+
+	<input type="submit" value="or use linkdin" class="bt btn-lg btn-success">
 </form>
 </div>
 </section>
 
 <script>
-	
+	createOAUTH = function(){
+		UserApp.OAuth.getAuthorizationUrl({ provider_id: 'linkedin', redirect_uri: 'https://yourapp.io/login' }, 
+			function(error, result) {
+				if (!error) {
+					window.location.href = result.authorization_url;
+				}
+			}
+		);
+	}	
 	createAccount = function(e){
 		var data = $('form').serializeArray();
 		UserApp.User.save({

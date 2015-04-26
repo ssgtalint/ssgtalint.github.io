@@ -1,6 +1,8 @@
 ---
 layout: employee
+permalink: /:categories/:title
 skillsid: 2
+username: sallymyer001
 title:  "sally myer"
 date:   2015-02-08 10:38:43
 position: "Sales Manager"

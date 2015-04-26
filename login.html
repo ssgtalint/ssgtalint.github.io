@@ -41,6 +41,13 @@ route: login
     	eraseCookie("ua_session_token");
     	eraseCookie("account_type");
 	});
+	UserApp.OAuth.getAuthorizationUrl({ provider_id: 'linkedin', redirect_uri: 'https://yourapp.io/login' }, 
+		function(error, result) {
+			if (!error) {
+				window.location.href = result.authorization_url;
+			}
+		}
+	);
 	createAccount = function(e){
 		var data = $('form').serializeArray();
 		UserApp.User.login({
