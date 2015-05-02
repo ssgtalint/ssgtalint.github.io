@@ -1,9 +1,8 @@
 ---
 layout: employee
 username: mandy
-permalink: /:categories/:title
 skillsid: 0
-permalink: /:categories/:title.html
+permalink: /employees/sally/
 title: "Mandy Esquire"
 location: Seatle
 position: "Sales Manager"

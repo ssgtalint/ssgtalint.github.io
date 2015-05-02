@@ -1,0 +1,137 @@
+---
+layout: unrestricted
+permalink: /members/
+---   
+
+<div id="inserthere"></div>
+
+<script type="text/template" id="member">
+<section class="row">
+<br><br>
+  <div class="col-md-8" style="background:white; margin:auto; float:none;padding-top:5rem;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center">
+          <!-- <img src="/assets/images/a0.png" alt="..." class="img-circle m-b"> -->
+          <h3 class="font-bold m-b-none m-t-none"><%= name %></h3>
+          <!-- <p>
+          </p> -->
+          <!-- <p><i class="fa fa-lg fa-circle text-primary m-r-sm" style="font-size:.8rem; position:relative; left:.5rem;bottom:.1rem;"></i><strong>verified by <a href="/employees/Olivia-jackson">manager</a> 1/1/11</strong></p> -->
+          <br>
+
+          <!-- <a href="#" for="filestyle-0" class="btn btn-s-md btn-primary">Request profile update</a> -->
+          <!-- <a href="#" class="btn btn-s-md btn-default">edit</a> -->
+          <!-- <a href="#" class="btn btn-s-md btn-default">add to contacts</a> -->
+        </div>                 
+      </div>
+      <div class="col-md-6">
+        
+        <!-- <p>drew.willon@scale.com</p> -->
+        
+      </div>
+    </div>
+    <div class="line b-b m-t m-b"></div>
+    <div class="wrapper m-b">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row m-b">
+        <div class="col-xs-6">
+          <small>Cell Phone</small>
+          <div class="text-lt font-bold">
+         	555
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <small>Email</small>
+          <div class="text-lt font-bold">
+            <%= email %>
+          </div>
+        </div>
+      </div>
+      <div class="row m-b">
+        <div class="col-xs-6">
+          <small>location</small>
+          <div class="text-lt font-bold">
+           	<%= location %>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <small>Bio</small>
+        <div class="text-lt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
+      </div>
+      <br>
+      <div class="links">
+        <small>Links</small><br>
+        <a class="text-lt font-bold" href="#">Resume</a> 
+        <a class="text-lt font-bold" href="#">Portfolio</a> 
+        <a class="text-lt font-bold" href="#">Linkdin</a>
+      </div>
+      <br><br>
+  
+        </div>
+
+        <div class="col-md-6" id="employee-skill-profile">
+          <% _.each(skills, function(skill){ %>
+            <li class="list-group-item">
+              <% skill.name = skillsList[skill.id] %>
+              <%= skill.name %><br> 
+              <% for (var i = 9; i >= 0; i--) { %>
+                <% if (skill.rank < i){ %>
+                  <i class="i i-circle-sm text" style="color:#177bbb"></i> 
+                <%  }; %>
+                <% if (skill.rank > i){ %>
+                  <i class="i i-circle-sm-o text"></i>
+                <%  }; %>
+              <% }; %>
+            </li>
+          <% });%>
+        </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+
+
+</section>
+</script>
+<!-- <i class="i i-circle-sm text" style="color:#177bbb"></i>
+                <i class="i i-circle-sm-o text"></i> -->
+
+
+<script>
+	function getQueryParams(qs) {
+	    qs = qs.split("+").join(" ");
+	    var params = {}, tokens,
+	        re = /[?&]?([^=]+)=([^&]*)/g;
+	    while (tokens = re.exec(qs)) {
+	        params[decodeURIComponent(tokens[1])]
+	            = decodeURIComponent(tokens[2]);
+	    }
+	    return params;
+	}
+
+	query = getQueryParams(document.location.search);
+
+	user = {};
+	UsersAll(function(users){
+		for (var i = users.length - 1; i >= 0; i--) {
+			if (users[i].login == query.user){
+				user = users[i];
+				console.log(user);
+			}
+		};
+		data = {
+				name: user.first_name + " " + user.last_name,
+				email: user.email,
+				location: user.properties.location.value,
+        skills: JSON.parse(user.properties.user_skills.value)
+		};
+			
+		template = _.template($("#member").html());
+		$("#inserthere").html(template(data));
+	});
+</script>
+
+

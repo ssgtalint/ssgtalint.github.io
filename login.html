@@ -1,6 +1,7 @@
 ---
 layout: unrestricted
 route: login
+permalink: /login/
 ---             
 <style>
 	label{width:100%;}
@@ -73,13 +74,14 @@ route: login
     	eraseCookie("ua_session_token");
     	eraseCookie("account_type");
 	});
-	UserApp.OAuth.getAuthorizationUrl({ provider_id: 'linkedin', redirect_uri: 'https://yourapp.io/login' }, 
-		function(error, result) {
-			if (!error) {
-				window.location.href = result.authorization_url;
-			}
-		}
-	);
+	// UserApp.OAuth.getAuthorizationUrl({ provider_id: 'google', redirect_uri: 'https://yourapp.io/login' }, 
+	// 	function(error, result) {
+	// 		if (!error) {
+	// 			window.location.href = result.authorization_url;
+	// 		}
+	// 	}
+	// );
+
 	createAccount = function(e){
 		var data = $('form').serializeArray();
 		UserApp.User.login({
@@ -92,8 +94,7 @@ route: login
 				} else {
 					id = result.user_id;
 					setCookie("ua_session_token", result.token, 1);
-
-					
+	
 					UserApp.User.get({"user_id": id}, function(error, result){
 	
 						if(!error){

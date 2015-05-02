@@ -1,0 +1,108 @@
+---
+layout: unrestricted
+permalink: /myid/
+---             
+<style>
+	label{width:100%;}
+	input{width:100%;}
+	.panel-default{max-width: 450px; margin:auto;}
+	#update-skills{
+		display: none;
+	}
+</style>  
+
+<!-- <script type="text/template" id="tr">
+{%for post in tabledata%}
+	<tr class="internal-{{post.internal}} entry">
+		<td class="applicantId" style="display:none;">{{forloop.index}}</td>
+  		{% for field in table %}
+  			<td class="{{field}} {% if field == "pay grade" %} manager-only {% endif %}" >   
+		    {%case field%}
+		    	{% when "name" %}
+		    		<a href="{{ post.url }}">
+                      <img src="/assets/images/a0.png" alt="...">
+                      <span>{{ post.title }}</span>
+                    </a>
+		    	{% when "jobtitle" %}
+		    		<a href="{{ post.url }}">
+                      <span>{{ post.jobtitle }}</span>
+                    </a>
+                {% when "applicants" %}
+                	<a href="{{ post.url }}">
+                      <span>{{ post.Applicants.size }}</span>
+                    </a>
+                {% when "availability" or "skillMatch" %}
+                	<div class="progress progress-xs m-t-xs m-b-none {{field}}">
+                      <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{post[field]}}%" style="width: {{post[field]}}%"></div>
+                    </div>
+		    	{% else %}
+					{{post[field]}}
+		    {%endcase%}
+		    <div id="compare-content" style="display:none" > asfsdfd</div>
+		    </td>
+		{% endfor %}
+		<th width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input class="filter-checkbox" id="foo" type="checkbox" sid="{{forloop.index}}" ename="{{post.title}}" url="{{post.url}}"><i class="filter-check"></i></label></th>
+	</tr>
+ {% endfor %}
+</script>  -->
+
+<div>
+row:
+	<script type="text/template" id="tr">
+		<table>
+		<% _.each(rows, function(member){ %>
+			<tr class="entry">
+				<td>
+					<a href="<%= member.url %>">
+                      <span><%= member.name %></span>
+                    </a>
+				</td>
+				<td>
+					<%= member.name %>
+				</td>
+				<td>
+					<%= member.location %>
+				</td>
+				<td>
+					<%= member.availability %>
+				</td>
+			</tr>
+		<% }); %>
+		</table>
+	</script>
+</div>
+
+
+
+<div id="inserthere">
+	
+</div>
+
+<!-- <div>
+	row
+</div> -->
+
+
+<script>
+	$(function(){
+		UsersAll(function(users){
+			console.log(users);
+			data = {rows:[]};
+			for (var i = users.length - 1; i >= 0; i--) {
+				datum = {
+					name: users[i].first_name,
+					url: '/members/' + users[i].login,
+					location: users[i].properties.location.value,
+					availability: users[i].properties.availability.value
+				}
+				data.rows[i] = datum;
+			};
+			
+			template = _.template($("#tr").html());
+			$("#inserthere").html(template(data));
+		});
+	});
+</script>
+
+
+

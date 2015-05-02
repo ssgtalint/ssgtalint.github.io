@@ -11,6 +11,7 @@
 {% assign table = site.data.table['employees'].fields %}
 {% assign tabledata = site.categories['employees'] %}
 
+
   	<div id="list-filter">
 	  <div class="row">
 		  <section class="col-md-4 col-lg-3">
@@ -58,6 +59,7 @@
 				    	</tr>
 				    </thead>
 				    <tbody class="list">
+				    <!--
 				    	{%for post in tabledata%}
 				    	<tr class="internal-{{post.internal}} entry">
 				    		<td class="applicantId" style="display:none;">{{forloop.index}}</td>
@@ -98,6 +100,52 @@
 							{% endfor %}
 						</script>
 					 	{% endfor %}
+					 -->
+					 <script type="text/template" id="tr">
+							<% _.each(rows, function(member){ %>
+								<tr class="entry">
+									<td class="name">
+										<a href="<%= member.url %>">
+					                      <span><%= member.name %></span>
+					                    </a>
+									</td>
+									<td class="location">
+										<%= member.location %>
+									</td>
+									<td >
+										<div class="progress progress-xs m-t-xs m-b-none skillMatch">
+					                      <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="10%" style="width: 10%"></div>
+					                    </div>
+									</td>
+									<td>
+										<div class="progress progress-xs m-t-xs m-b-none availability">
+					                      <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="<%= member.availability %>%" style="width: <%= member.availability %>%"></div>
+					                    </div>
+									</td>
+									<th width=30><label class="checkbox m-l m-t-none m-b-none i-checks"><input class="filter-checkbox" id="foo" type="checkbox"><i class="filter-check"></i></label></th>
+								</tr>
+							<% }); %>
+						</script>
+						<script>
+							$(function(){
+								UsersAll(function(users){
+									console.log(users);
+									data = {rows:[]};
+									for (var i = users.length - 1; i >= 0; i--) {
+										datum = {
+											name: users[i].first_name,
+											url: '/members?user=' + users[i].login,
+											location: users[i].properties.location.value,
+											availability: users[i].properties.availability.value
+										}
+										data.rows[i] = datum;
+									};
+									
+									template = _.template($("#tr").html());
+									$("tbody.list").html(template(data));
+								});
+							});
+						</script>
 				    </tbody>
 				  </table>
 			  	</div>
@@ -128,14 +176,18 @@
 	</div>
 	<script src="http://listjs.com/no-cdn/list.js"></script>
 	<script>
-		var options = {
-		  valueNames: [ 
-		  	'applicantId',
-			{% for field in table %}
-				'{{field}}',
-			{%endfor%} 
-		  ]
-		};
+		$(function(){
+			var options = {
+				valueNames: [ 
+				  	'applicantId',
+					{% for field in table %}
+						'{{field}}',
+					{%endfor%} 
+				  ]
+			};
 
-		var userList = new List('list-filter', options);
+			console.log(options);
+
+			var userList = new List('list-filter', options);
+			})
 	</script>

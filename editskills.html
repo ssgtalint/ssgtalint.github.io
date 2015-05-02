@@ -1,0 +1,191 @@
+---
+layout: basic
+permalink: /edit/
+---             
+<style>
+	label{width:100%;}
+	input{width:100%;}
+	.panel-default{max-width: 450px; margin:auto;}
+	#update-skills{
+		display: none;
+	}
+</style>          
+<br>
+<h1 style="text-align:center">edit skills</h1><br>
+
+{% assign skillNames = site.data.skills.names %} 
+{% assign groups = site.data.skills.groups %}
+ 
+
+<div class="row"> 
+{% for g in groups %}
+{% assign gid = forloop.index %}
+<div class="col-md-3">
+<div class="panel b-a" id="skills">
+      <div class="panel-heading b-b">
+        
+        <button class="btn btn-clear pull-right" data-toggle="button" >
+          <span class="text" data-toggle="collapse" data-target="#skills-{{g | remove: " " | remove: "&" | remove: "," | remove: "."}}">
+            <i class="fa fa-chevron-right rotate90"></i> 
+          </span>
+          <span class="text-active" data-toggle="collapse" data-target="#skills-{{g | remove: " " | remove: "&" | remove: "," | remove: "."}}">
+            <i class="fa fa-chevron-right "></i>
+          </span>
+        </button>
+        <button class="btn btn-clear pull-right secondary-drop-button">
+          <i class="fa fa-plus pull-right"></i>
+        </button>
+        
+        <a href="#" id="skillsheader" class="font-bold">{{g}}</a>
+        
+      </div>
+
+        <ul id="skills-{{g | remove: " " | remove: "&" | remove: "," | remove: "."}}" class="collapse in list-group no-radius skills-list-ul">
+        <li class="list-group-item skilltypehead"><input type="text" class="form-control" id="typehead{{gid}}" placeholder="add skill"></li>
+
+       
+        </ul>
+  </div>
+</div>
+
+<script type="text/template" id="skillItem">
+	<li class="list-group-item">
+            <%= name%>
+            <span style="display:none;"> <%= rank %>/10</span>
+            
+            <input class="slider slider-horizontal form-control" 
+				type="text" 
+				value="" 
+				data-slider-skill="<%= id %>"
+				data-slider-min="0" 
+				data-slider-max="10" 
+				data-slider-step="1" 
+				data-slider-value="<%= rank %>" 
+				data-slider-orientation="horizontal">
+
+            <div class="row scale">
+              <div class="col-sm-4 col-xs-6">low skill</div>
+              <div class="col-xs-4 hidden-xs" style="text-align:center">medium</div>
+              <div class="col-sm-4 col-xs-6" style="text-align:right">high skill</div>
+            </div>
+          </li>
+</script>
+
+
+  
+ {% endfor %}
+ <input type="submit" value="save" class="btn btn-lg" onclick="saveSkills()">
+
+</div>
+
+<script>
+getskills = function(){
+	UserApp.User.get({}, function(error, result){ 
+		if(!error){
+			var userskills = JSON.parse(result[0].properties.user_skills.value);
+			for (var i = userskills.length - 1; i >= 0; i--) {
+				var sName = skillsList[userskills[i].id];
+				var sGroup = groupBySkill[(userskills[i].id)] -1;
+				var sGroupName = groups[sGroup];
+				var data = {
+					name: sName, 
+					rank: userskills[i].rank,
+					id: userskills[i].id,
+				};
+
+				skillsListEls = $(".skills-list-ul");
+				skillTemplate = _.template($('#skillItem').html());
+				
+				$(skillsListEls[sGroup]).append(skillTemplate(data));
+
+
+				console.log(sName, sGroup, sGroupName);
+			};
+			var sliders = $(".slider");
+			for (var i = sliders.length - 1; i >= 0; i--) {
+				$(sliders[i]).slider();
+			};
+		}
+	});
+}
+
+
+
+
+saveSkills = function(){
+	var sliders = $("[data-slider-skill]");
+	skillbank = [];
+	for (var i = sliders.length - 1; i >= 0; i--) {
+		skill = {}
+		skill.rank = $(sliders[i]).val() == "" ? $($("[data-slider-skill]")[i]).attr("data-slider-value") : $(sliders[i]).val() ;
+		skill.id = $(sliders[i]).attr("data-slider-skill");
+		skillbank.push(skill);
+	};
+
+	console.log(JSON.stringify(skillbank));
+
+	// save to user
+	UserApp.User.get({}, function(error, result){ 
+	if(!error){
+		UserApp.User.save({
+			"user_id": result[0].user_id,
+		    "properties": {
+			        "user_type": {
+			            "value": "goo",
+			            "override": true
+			        },
+			        "user_skills": {
+			            "value": JSON.stringify(skillbank),
+			            "override": true
+			        },
+			    }
+		}, function (error, result){
+			console.log(error, result);
+		});
+	}
+	});
+	
+}
+
+	$(function(){
+
+		getskills();
+
+		$(".fa-plus").click(function(ev){
+		      $(ev.target).parent().parent().parent().find(".skilltypehead").toggle();
+		      $('[id^="typehead"], [id*=" typehead"]').val("");
+		      // $(".skilltypehead").parent.parend.toggle();
+		});
+
+		selectSkill = function(){
+			$(".tt-dropdown-menu").click(function(ev){
+				var thisList = $(ev.target).parent().parent().parent().parent().parent().parent().parent();
+				var typehead = thisList.find('[id^="typehead"], [id*=" typehead"]');
+				var skill = typehead.val();
+				var index = skillsList.indexOf(skill);
+				if(!requiredSkills[index]){
+				var index = skillsList.indexOf(skill);
+				console.log(index);
+				requiredSkills[index] = true;
+
+				var slider = '<input class="slider slider-horizontal form-control" type="text" value="" data-slider-skill="'+index+'"data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal">';
+				var scale ='<div class="row scale"><div class="col-sm-4 col-xs-6">low skill</div><div class="col-xs-4 hidden-xs" style="text-align:center">medium</div><div class="col-sm-4 col-xs-6" style="text-align:right">high skill</div></div>';
+
+				var html = "<li class='list-group-item'>"+skill+slider+scale+"</li>";
+				thisList.append(html);
+				$("[data-slider-skill="+index+"]").slider().on('slideStop', function(ev){
+				  sliderUpdate(ev);
+				});
+				}
+				thisList.find(".skilltypehead").toggle();
+			});
+		}
+
+		window.setTimeout(selectSkill, 100);	
+	});
+</script>
+
+<script src="/assets/js/verify.js"></script>
+
+
+

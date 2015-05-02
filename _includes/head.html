@@ -24,12 +24,15 @@
 	<![endif]-->
 
 	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/underscore.js" ></script>
+
 	<script>
 		requiredSkills = [];
 		skillProfiles = [];
 		skillsList = [];
 		groups = [];
 		skillsByGroup = [];
+		groupBySkill = [];
 		compare = [];
 		{% for g in site.data.skills.groups  %}
 			groups.push("{{g}}");
@@ -46,6 +49,17 @@
 		{% for skill in site.data.skills.names %}
 			skillsList.push("{{skill.name}}");
 		{% endfor %}
+		{% for skill in site.data.skills.names %}
+			groupBySkill.push("{{skill.group}}");
+		{% endfor %}
+
+		users = [
+			{% for member in site.data.users %}
+				"{{member}}",
+			{% endfor %}
+		];
+
+		SUPERUSER = 'G_VY-QsJSyWfC33105kFGg';
 
 
 	</script>
@@ -53,6 +67,25 @@
 	<script src="https://app.userapp.io/js/userapp.client.js"></script>
 	<script>
 		UserApp.initialize({ appId: "5519948350a60" });
+
+		UsersAll = function(f){
+			UserApp.User.get({"user_id" : [SUPERUSER] }, function(error, result){ 
+				if(!error){
+					users = JSON.parse(result[0].properties.ids.value);
+					UserApp.User.get({user_id: users}, function(error, result){
+						if(!error){
+							f(result);
+						}else{
+							console.log(error);
+						}
+					});
+				}else{
+					console.log(error);
+				}
+			});
+		}
+
+		
 	</script>
 
 

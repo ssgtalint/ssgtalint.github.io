@@ -29,7 +29,7 @@
         <li class="list-group-item skilltypehead"><input type="text" class="form-control" id="typehead{{gid}}" placeholder="add skill"></li>
         {% for skill in skills %}
         {% if gid == skillNames[skill.id].group %}
-            <li class="list-group-item">
+          <li class="list-group-item">
             {{skillNames[skill.id].name}}
             <span style="display:none;"> {{skill.rank}}/10</span>
             {% include skillSlider.html %}
