@@ -51,6 +51,41 @@
       }
     }
 
+    window.selectSkill = function(){
+      $(".tt-dropdown-menu").click(function(ev){
+        var thisList = $(ev.target).parent().parent().parent().parent().parent().parent().parent();
+        var typehead = thisList.find('[id^="typehead"], [id*=" typehead"]');
+        var skill = typehead.val();
+        var index = skillsList.indexOf(skill);
+        if(!requiredSkills[index]){
+        var index = skillsList.indexOf(skill);
+        console.log(index);
+        requiredSkills[index] = true;
+
+        var slider = '<input class="slider slider-horizontal form-control" type="text" value="" data-slider-skill="'+index+'"data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal">';
+        var scale ='<div class="row scale"><div class="col-sm-4 col-xs-6">low skill</div><div class="col-xs-4 hidden-xs" style="text-align:center">medium</div><div class="col-sm-4 col-xs-6" style="text-align:right">high skill</div></div>';
+
+        var html = "<li class='list-group-item'>"+skill+slider+scale+"</li>";
+        thisList.append(html);
+        $("[data-slider-skill="+index+"]").slider().on('slideStop', function(ev){
+          sliderUpdate(ev);
+        });
+        }
+        thisList.find(".skilltypehead").toggle();
+      });
+    }
+    window.selectSkill();
+
+    //add skill menu
+    window.activateAddSkillIcon = function(){
+      $(".fa-plus").click(function(ev){
+        $(ev.target).parent().parent().parent().find(".skilltypehead").toggle();
+        $('[id^="typehead"], [id*=" typehead"]').val("");
+        // $(".skilltypehead").parent.parend.toggle();
+      });
+    }
+    window.activateAddSkillIcon();
+
     // queries employee page for skills information and calls insert after its gathered at most 3 employees from the global compare list
     updateCompareModal = function(){
       c = 0; //limits to 3 records
@@ -112,7 +147,7 @@
       var id = ($(ev.target).attr("data-slider-skill"));
       requiredSkills[0] = value;
       $(ev.target).parent().parent().find('span').html(" "+ value + "/10");
-      sortListBySkill();
+      window.sortListBySkill();
     }; 
      
   	$("input[data-slider-value]").on('slideStop', function(ev){
@@ -120,7 +155,7 @@
     });
 
 
-    function calculateMatch(requirements, profile){
+    window.calculateMatch= function(requirements, profile){
       var possiblePoints=0;
       var profilePoints = 0;
       for (var i = requirements.length - 1; i >= 0; i--) {
@@ -143,23 +178,25 @@
       console.log(Math.floor(((profilePoints)/possiblePoints)*100));
       return Math.floor(((profilePoints)/possiblePoints)*100);
     }
-    // calculateMatch();
+    // window.calculateMatch();
 
   	// calculate skill value
+
     window.sortListBySkill = function(){ 
-    	for (var i = userList.items.length-1; i >= 0; i--) {
-        var values = userList.items[i].values();
-        if(values.applicantId){
-            // console.log(values.name, skillProfiles[values.applicantId]);
+    	for (var i = window.userList.size()-1; i >= 0; i--) {
+        var values = window.userList.items[i].values();
+        if(values.applicantId+1){
+            console.log(values.name, skillProfiles[values.applicantId]);
             // console.log(requiredSkills);
-            var skillMatch = calculateMatch(requiredSkills, skillProfiles[values.applicantId]);
+            var skillMatch = window.calculateMatch(window.requiredSkills, window.skillProfiles[values.applicantId]);
+            // console.log(skillMatch);
             values.skillMatch = '<div class="progress progress-xs m-t-xs m-b-none skillMatch"><div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="'+skillMatch+'%" style="width:'+skillMatch+'%"></div></div>';
-            userList.items[i].values(values);
+            window.userList.items[i].values({skillMatch: skillMatch});
         }
       }
-      userList.sort('skillMatch', { order: "desc" });
+      window.userList.sort('skillMatch', { order: "desc" });
     }
-    sortListBySkill();
+    window.sortListBySkill();
     $(".skilltypehead").toggle();
 
     // window.toggleSkillPanel = function(el){
@@ -169,34 +206,31 @@
     
   
 
-    //add skill menu
-    $(".fa-plus").click(function(ev){
-      $(ev.target).parent().parent().parent().find(".skilltypehead").toggle();
-      $('[id^="typehead"], [id*=" typehead"]').val("");
-      // $(".skilltypehead").parent.parend.toggle();
-    })
+    
 
 
     //add skills
-    $(".tt-dropdown-menu").click(function(ev){
-      var thisList = $(ev.target).parent().parent().parent().parent().parent().parent().parent();
-      var typehead = thisList.find('[id^="typehead"], [id*=" typehead"]');
-      var skill = typehead.val();
-      var index = skillsList.indexOf(skill);
-      if(!requiredSkills[index]){
-        var index = skillsList.indexOf(skill);
-        console.log(index);
-        var slider = '<input class="slider slider-horizontal form-control" type="text" value="" data-slider-skill="'+index+'"data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal">';
-        var scale ='<div class="row scale"><div class="col-sm-4 col-xs-6">low skill</div><div class="col-xs-4 hidden-xs" style="text-align:center">medium</div><div class="col-sm-4 col-xs-6" style="text-align:right">high skill</div></div>';
+    
+    // $(".tt-dropdown-menu").click(function(ev){
+    //   console.log(ev);
+    //   var thisList = $(ev.target).parent().parent().parent().parent().parent().parent().parent();
+    //   var typehead = thisList.find('[id^="typehead"], [id*=" typehead"]');
+    //   var skill = typehead.val();
+    //   var index = skillsList.indexOf(skill);
+    //   if(!requiredSkills[index]){
+    //     var index = skillsList.indexOf(skill);
+    //     console.log(index);
+    //     var slider = '<input class="slider slider-horizontal form-control" type="text" value="" data-slider-skill="'+index+'"data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal">';
+    //     var scale ='<div class="row scale"><div class="col-sm-4 col-xs-6">low skill</div><div class="col-xs-4 hidden-xs" style="text-align:center">medium</div><div class="col-sm-4 col-xs-6" style="text-align:right">high skill</div></div>';
 
-        var html = "<li class='list-group-item'>"+skill+slider+scale+"</li>";
-        thisList.append(html);
-        $("[data-slider-skill="+index+"]").slider().on('slideStop', function(ev){
-          sliderUpdate(ev);
-        });
-      }
-      thisList.find(".skilltypehead").toggle();
-    });
+    //     var html = "<li class='list-group-item'>"+skill+slider+scale+"</li>";
+    //     thisList.append(html);
+    //     $("[data-slider-skill="+index+"]").slider().on('slideStop', function(ev){
+    //       sliderUpdate(ev);
+    //     });
+    //   }
+    //   thisList.find(".skilltypehead").toggle();
+    // });
   });
 
   

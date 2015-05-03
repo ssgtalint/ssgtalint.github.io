@@ -28,14 +28,14 @@ permalink: /signup/
 		<input class="form-control" type="password" id="password"  name="password" value="12345">
 	</div>	
 
-	<div class="form-group">
+	<!-- <div class="form-group">
 		<label for="type">Account type</label> <br>
 		<select name="type" id="type" class="form-control">
 			<option value="hr">hr</option>
 			<option value="employee">employee</option>
 			<option value="manager">manager</option>
 		</select>
-	</div>
+	</div> -->
 	<br>
 	
 	<input type="submit" value="create account" class="btn btn-lg btn-success">
@@ -63,13 +63,7 @@ permalink: /signup/
 		UserApp.User.save({
 		    "login": data[0].value,
 		    "email": data[1].value,
-		    "password": data[2].value,
-		    "properties": {
-		        "user_type": {
-		            "value": data[3].value,
-		            "override": true
-		        }
-		    }
+		    "password": data[2].value
 		}, function(error, result){
 		   console.log(error);
 		   console.log(result.user_id);

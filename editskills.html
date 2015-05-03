@@ -1,5 +1,5 @@
 ---
-layout: basic
+layout: unrestricted
 permalink: /edit/
 ---             
 <style>
@@ -9,18 +9,35 @@ permalink: /edit/
 	#update-skills{
 		display: none;
 	}
+
+	.oddpanel, .evenpanel{
+		width: 49%;
+		display: inline-block;
+	}
+	.oddpanel:after, .evenpanel:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	.oddpanel{
+		float:right;
+	}
+	.evenpanel{
+		float:left;
+	}
 </style>          
 <br>
-<h1 style="text-align:center">edit skills</h1><br>
+<h1 style="text-align:center">edit profile</h1><br>
 
 {% assign skillNames = site.data.skills.names %} 
 {% assign groups = site.data.skills.groups %}
  
-
+<div id="content">
 <div class="row"> 
+<div class="col-md-3 col-md-offset-3">
 {% for g in groups %}
 {% assign gid = forloop.index %}
-<div class="col-md-3">
+<div>
 <div class="panel b-a" id="skills">
       <div class="panel-heading b-b">
         
@@ -74,8 +91,32 @@ permalink: /edit/
 
   
  {% endfor %}
- <input type="submit" value="save" class="btn btn-lg" onclick="saveSkills()">
+ 
+ </div>
+ <div class="col-md-3">
+ 	<form role="form" onsubmit="createAccount(); return false;">
 
+		<div class="form-group">
+			<label for="fname">first name</label> <br>
+			<input class="form-control" type="text" id="fname" name="fname" value="">
+		</div> 
+
+		<div class="form-group">
+			<label for="lname">last name</label> <br>
+			<input class="form-control" type="text" id="lname" name="lname" value="">
+		</div>  
+
+		<div class="form-group">
+			<label for="email">email</label> <br>
+			<input class="form-control" type="email" id="email" name="email" value="">
+		</div> 
+	</form>
+	<br>
+	<input type="submit" value="save profile" class="btn btn-lg" onclick="saveProfile()">
+</div>
+
+
+</div>
 </div>
 
 <script>
@@ -109,10 +150,24 @@ getskills = function(){
 	});
 }
 
+getAdditionalUserInformation = function(){
+	UserApp.User.get({}, function(error, result){
+		if(!error){
+			$("#login").val(result[0].login);
+			$("#fname").val(result[0].first_name);
+			$("#lname").val(result[0].last_name);
+			$("#email").val(result[0].email);
+
+		}
+	})
+}
 
 
 
-saveSkills = function(){
+
+saveProfile = function(){
+	data = $('form').serializeArray();
+
 	var sliders = $("[data-slider-skill]");
 	skillbank = [];
 	for (var i = sliders.length - 1; i >= 0; i--) {
@@ -127,11 +182,15 @@ saveSkills = function(){
 	// save to user
 	UserApp.User.get({}, function(error, result){ 
 	if(!error){
+		setCookie("account_type", "hr");
 		UserApp.User.save({
 			"user_id": result[0].user_id,
+			"first_name" : data[0].value,
+			"last_name": data[1].value,
+			"email" : data[2].value,
 		    "properties": {
 			        "user_type": {
-			            "value": "goo",
+			            "value": "hr",
 			            "override": true
 			        },
 			        "user_skills": {
@@ -140,7 +199,9 @@ saveSkills = function(){
 			        },
 			    }
 		}, function (error, result){
-			console.log(error, result);
+			if(!error){
+				alert('saved profile');
+			}
 		});
 	}
 	});
@@ -150,9 +211,12 @@ saveSkills = function(){
 	$(function(){
 
 		getskills();
+		getAdditionalUserInformation();
 
 		$(".fa-plus").click(function(ev){
+			// console.log('foo');
 		      $(ev.target).parent().parent().parent().find(".skilltypehead").toggle();
+		      // console.log($(ev.target).parent().parent().parent().find(".skilltypehead"));
 		      $('[id^="typehead"], [id*=" typehead"]').val("");
 		      // $(".skilltypehead").parent.parend.toggle();
 		});
@@ -182,7 +246,11 @@ saveSkills = function(){
 		}
 
 		window.setTimeout(selectSkill, 100);	
+
+		// $(".skilltypehead").attr("style", "display: block !important;");
 	});
+
+
 </script>
 
 <script src="/assets/js/verify.js"></script>

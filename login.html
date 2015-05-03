@@ -98,9 +98,8 @@ permalink: /login/
 					UserApp.User.get({"user_id": id}, function(error, result){
 	
 						if(!error){
-							
 							setCookie("account_type", result[0].properties.user_type.value, 1);
-							location = '/';
+							location = '/edit';
 						}else{
 							$("#signuperror").html(error.message);
 						}
