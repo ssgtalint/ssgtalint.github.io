@@ -162,6 +162,38 @@ getAdditionalUserInformation = function(){
 	})
 }
 
+storeUser = function(id, f){
+		UserApp.User.login({
+			"login": "superuser",
+			"password": "RNs1120!!"
+		},function(er,re){
+			UserApp.User.get({user_id:SUPERUSER},function(error, result){
+				if(!error){
+					currentIDs = JSON.parse(result[0].properties.ids.value);
+					currentIDs.push(id);
+					currentIDs = JSON.stringify(currentIDs);
+					console.log(currentIDs);
+					
+					UserApp.User.save({
+						"user_id" : SUPERUSER,
+						"properties": {
+							"ids": {
+								"value": currentIDs,
+								"override": true
+							}
+						} 
+					}, function(error, result){
+						console.log(error);
+						console.log(result);
+						f();
+					});
+				}else{
+					console.log(error);
+				}
+			});
+		});
+	}
+
 
 
 
