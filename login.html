@@ -23,14 +23,20 @@ permalink: /login/
 		<input type="password" id="password" value="12345" name="password" class="form-control">
 	</div> <br>
 	
-	<input type="submit" value="sign in" class="btn btn-lg btn-success">
+	<input type="submit" value="sign in" class="btn btn-lg btn-primary">
 	<br>
 	
 	<p style="text-align:center" id="signuperror"></p>
 	
 </form>
 </div>
-<input type="submit" value="or use google" class="btn btn-lg" onclick="oauth()">
+</section>
+<br>
+
+<section class="panel panel-default">
+<div class="panel-body">
+<input type="submit" id="google" value="google login" class="btn btn-lg btn-danger" onclick="oauth(); return false;">
+</div>
 </section>
 <br>
 
@@ -53,6 +59,7 @@ permalink: /login/
 	var query = getQueryParams(document.location.search);
 	if (query.ua_token != undefined){
 		setCookie("ua_session_token", query.ua_token, 1);
+		UserApp.User.get({}, function(er,re){alert(re, er)});
 		setCookie("account_type", "manager", 1);
 		location = '/';
 	}

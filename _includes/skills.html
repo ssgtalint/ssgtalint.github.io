@@ -1,4 +1,4 @@
-{% assign skills = site.data.skills.skillsets[page.skillsid] %} 
+{% assign skills = site.data.skills.skillsets[0] %} 
 {% assign skillNames = site.data.skills.names %} 
 {% assign groups = site.data.skills.groups %}
   
@@ -31,6 +31,7 @@
         {% if gid == skillNames[skill.id].group %}
           <li class="list-group-item">
             {{skillNames[skill.id].name}}
+            <span class="delete-skill" >x</span>
             <span style="display:none;"> {{skill.rank}}/10</span>
             {% include skillSlider.html %}
             <div class="row scale">
@@ -80,6 +81,15 @@
   {% for skill in skills %}
     requiredSkills[{{skill.id}}] = {{skill.rank}};
   {% endfor %}
+
+
+  $(function(){
+      //delete skill
+    $(".delete-skill").click(function(ev){
+      // console.log($(ev.target).parent);
+      alert('foo');
+    });
+  });
 
 
 </script>

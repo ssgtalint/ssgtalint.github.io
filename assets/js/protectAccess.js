@@ -1,5 +1,10 @@
 var token = getCookie("ua_session_token");
 
+usertypedefined = function(user){
+    return user.properties.user_type.value != "" &&
+    user.properties.user_type.value != null;
+}
+
 if(token){
 	UserApp.setToken(token);
 
@@ -20,9 +25,7 @@ if(token){
                 window.location.href = "/logout";
             }
 
-
-            if(user[0].properties.user_type.value == "" &&
-                location.pathname != '/edit/'
+            if( !usertypedefined(user[0]) && location.pathname != '/edit/'
             ){
                 alert('please complete your user profile');
                 window.location.href = "/edit";

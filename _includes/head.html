@@ -85,6 +85,24 @@
 			});
 		}
 
+		myid= function(f){
+		    UserApp.User.get({}, function(er,re){
+		        if(!error){
+		        	f(re[0].user_id)
+		        }
+		    })
+		}
+
+		myName = function(f){
+			UserApp.User.get({}, function(er,re){
+		        if(!er){
+		        	f(re[0].first_name, re[0].last_name);
+		        }else{
+		        	console.log(er);
+		        }
+		    })
+		}
+
 		
 	</script>
 

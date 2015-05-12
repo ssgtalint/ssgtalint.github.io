@@ -6,6 +6,7 @@ permalink: /signup/
 	label{width:100%;}
 	input{width:100%;}
 	.panel-default{max-width: 450px; margin:auto;}
+	#google{width: 418px; max-width: 100%; margin: 0 auto; float: none;}
 </style>          
 <br>
 <h1 style="text-align:center">Signup</h1><br>
@@ -13,43 +14,45 @@ permalink: /signup/
 <div class="panel-body">
 <form role="form" onsubmit="createAccount(); return false;">
 	<br>
+
 	<div class="form-group">
-		<label for="login">Username</label> <br>
-		<input class="form-control" type="text" id="login" name="login" value="test">
+		<label for="login">First name</label> <br>
+		<input class="form-control" type="text" id="fname" name="fname" value="">
+	</div> 
+
+	<div class="form-group">
+		<label for="login">Last name</label> <br>
+		<input class="form-control" type="text" id="lname" name="lname" value="">
 	</div> 
 
 	<div class="form-group">
 		<label for="email">email</label> <br>
 		<input class="form-control" type="email" id="email" name="email" value="test@gmail.com">
-	</div> 
+	</div>
 
 	<div class="form-group">
 		<label for="password">password</label> <br>
 		<input class="form-control" type="password" id="password"  name="password" value="12345">
 	</div>	
 
-	<!-- <div class="form-group">
-		<label for="type">Account type</label> <br>
-		<select name="type" id="type" class="form-control">
-			<option value="hr">hr</option>
-			<option value="employee">employee</option>
-			<option value="manager">manager</option>
-		</select>
-	</div> -->
 	<br>
 	
-	<input type="submit" value="create account" class="btn btn-lg btn-success">
-	<br>
-	<p id="signuperror"></p><br>
+	<input type="submit" value="create account" class="btn btn-lg btn-primary">
+	<p id="signuperror"></p>
 </form>
 </div>
+</section>
+<br>
 
-<input type="submit" value="or use google" class="btn btn-lg" onclick="oauth()">
+<section class="panel panel-default">
+<div class="panel-body">
+<input type="submit" id="google" value="or signup with google" class="btn btn-lg btn-danger" onclick="oauthSignup(); return false;">
+</div>
 </section>
 
 <script>
-	oauth = function(){
-		UserApp.OAuth.getAuthorizationUrl({ provider_id: 'google', redirect_uri: 'http://localhost:4000/verify' }, 
+	oauthSignup = function(){
+		UserApp.OAuth.getAuthorizationUrl({ provider_id: 'google', redirect_uri: 'http://localhost:4000/login' }, 
 			function(error, result) {
 				if (!error) {
 					window.location.href = result.authorization_url;
@@ -60,52 +63,61 @@ permalink: /signup/
 
 	createAccount = function(e){
 		var data = $('form').serializeArray();
+		if (! data[0].value || !data[1].value){
+			$("#signuperror").html("</br>first and last name are required");
+			return false;
+		}
+
 		UserApp.User.save({
-		    "login": data[0].value,
-		    "email": data[1].value,
-		    "password": data[2].value
+			"fname": data[0].value,
+			"lname": data[1].value,
+		    "login": data[2].value.split("@")[0],
+		    "email": data[2].value,
+		    "password": data[3].value
 		}, function(error, result){
-		   console.log(error);
-		   console.log(result.user_id);
-
-		   storeUser(result.user_id, function(error, result){
-		   		slogin(error, result);
-		   });	
+			if(error){
+		   		$("#signuperror").html("<br>"+error.message);
+			}else {
+				// storeUser(result.user_id, function(error, result){
+		  		//  	slogin(error, result);
+		  		// });
+		  		slogin(error, result);
+			}
 		});
 	}
 
 
-	storeUser = function(id, f){
-		UserApp.User.login({
-			"login": "superuser",
-			"password": "RNs1120!!"
-		},function(er,re){
-			UserApp.User.get({user_id:SUPERUSER},function(error, result){
-				if(!error){
-					currentIDs = JSON.parse(result[0].properties.ids.value);
-					currentIDs.push(id);
-					currentIDs = JSON.stringify(currentIDs);
-					console.log(currentIDs);
+	// storeUser = function(id, f){
+	// 	UserApp.User.login({
+	// 		"login": "superuser",
+	// 		"password": "RNs1120!!"
+	// 	},function(er,re){
+	// 		UserApp.User.get({user_id:SUPERUSER},function(error, result){
+	// 			if(!error){
+	// 				currentIDs = JSON.parse(result[0].properties.ids.value);
+	// 				currentIDs.push(id);
+	// 				currentIDs = JSON.stringify(currentIDs);
+	// 				console.log(currentIDs);
 					
-					UserApp.User.save({
-						"user_id" : SUPERUSER,
-						"properties": {
-							"ids": {
-								"value": currentIDs,
-								"override": true
-							}
-						} 
-					}, function(error, result){
-						console.log(error);
-						console.log(result);
-						f();
-					});
-				}else{
-					console.log(error);
-				}
-			});
-		});
-	}
+	// 				UserApp.User.save({
+	// 					"user_id" : SUPERUSER,
+	// 					"properties": {
+	// 						"ids": {
+	// 							"value": currentIDs,
+	// 							"override": true
+	// 						}
+	// 					} 
+	// 				}, function(error, result){
+	// 					console.log(error);
+	// 					console.log(result);
+	// 					f();
+	// 				});
+	// 			}else{
+	// 				$("#signuperror").html("</br>"+error.message);
+	// 			}
+	// 		});
+	// 	});
+	// }
 
 	slogin = function(error, result){
 		if(error){
@@ -113,8 +125,8 @@ permalink: /signup/
 		}else{
 			var data = $('form').serializeArray();
 			UserApp.User.login({
-				"login": data[0].value,
-				"password": data[2].value
+				"login": data[2].value.split("@")[0],
+				"password": data[3].value
 				}, 
 				function(error, result) {
 					if (error) {

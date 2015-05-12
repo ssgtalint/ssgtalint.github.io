@@ -110,6 +110,12 @@ permalink: /edit/
 			<label for="email">email</label> <br>
 			<input class="form-control" type="email" id="email" name="email" value="">
 		</div> 
+
+		<div class="form-group">
+			<label for="email">availability (on a scale 1-5, 5 being least busy)</label> <br>
+			<input class="form-control" type="availability" id="availability" name="availability" value="">
+		</div> 
+
 	</form>
 	<br>
 	<input type="submit" value="save profile" class="btn btn-lg" onclick="saveProfile()">
@@ -157,6 +163,7 @@ getAdditionalUserInformation = function(){
 			$("#fname").val(result[0].first_name);
 			$("#lname").val(result[0].last_name);
 			$("#email").val(result[0].email);
+			$("#availability").val(result[0].properties.availability.value);
 
 		}
 	})
@@ -170,23 +177,26 @@ storeUser = function(id, f){
 			UserApp.User.get({user_id:SUPERUSER},function(error, result){
 				if(!error){
 					currentIDs = JSON.parse(result[0].properties.ids.value);
-					currentIDs.push(id);
-					currentIDs = JSON.stringify(currentIDs);
-					console.log(currentIDs);
-					
-					UserApp.User.save({
-						"user_id" : SUPERUSER,
-						"properties": {
-							"ids": {
-								"value": currentIDs,
-								"override": true
-							}
-						} 
-					}, function(error, result){
-						console.log(error);
-						console.log(result);
-						f();
-					});
+
+					if($.inArray(id, currentIDs) == -1){
+						currentIDs.push(id);
+						currentIDs = JSON.stringify(currentIDs);
+						console.log(currentIDs);
+						
+						UserApp.User.save({
+							"user_id" : SUPERUSER,
+							"properties": {
+								"ids": {
+									"value": currentIDs,
+									"override": true
+								}
+							} 
+						}, function(error, result){
+							console.log(error);
+							console.log(result);
+							f();
+						});
+					}
 				}else{
 					console.log(error);
 				}
@@ -220,6 +230,7 @@ saveProfile = function(){
 			"first_name" : data[0].value,
 			"last_name": data[1].value,
 			"email" : data[2].value,
+			"login" : result[0].login || data[2].value.split("@")[0],
 		    "properties": {
 			        "user_type": {
 			            "value": "hr",
@@ -229,11 +240,20 @@ saveProfile = function(){
 			            "value": JSON.stringify(skillbank),
 			            "override": true
 			        },
+			        "availability": {
+			        	value: data[3].value,
+			        	override: true
+			        }
 			    }
-		}, function (error, result){
-			if(!error){
-				alert('saved profile');
-			}
+		}, function(error, result){
+		   console.log(error);
+		   console.log(result.user_id);
+
+		   if(!error){
+		   	alert('saved profile');
+		   }
+
+		   storeUser(result.user_id, function(error, result){});	
 		});
 	}
 	});
