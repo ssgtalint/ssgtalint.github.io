@@ -110,6 +110,13 @@
 						</script>
 					 	{% endfor %}
 					 -->
+
+					 <script type="text/template" id="progressbar">
+						<div class="progress progress-xs m-t-xs m-b-none">
+						 	<div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="<%= progress %>%" style="width:<%= progress %>%; height: 60px; position:relative; top:-30px;" >
+						 	</div>
+						 </div>
+					</script>
 					 <script type="text/template" id="dontdelete">
 					 	
 					 </script>
@@ -184,31 +191,38 @@
 			UsersAll(function(users){
 				data = [];
 				for (var i = users.length - 1; i >= 0; i--) {
-					// map userapp model to schema expected by table
+					// // map userapp model to schema expected by table
 					datum = {
-						name: users[i].first_name,
+						name: users[i].login,
 						applicantId: i,
 						url: '/members?user=' + users[i].login,
-						location: users[i].properties.location.value || "Portland, Oregon",
+						location: users[i].properties.location.value,
 						availability: users[i].properties.availability.value
 					}
 
 					// update global skills objects
-					var skills = JSON.parse(users[i].properties.user_skills.value);
+					//var skills = JSON.parse(users[i].properties.user_skills.value);
+					console.log(i, JSON.parse(users[i].properties.user_skills.value));
 					skillProfiles[i] = [];
 					_.each(skills, function(skill){
 						// console.log(skill.rank, skill.id);
+						console.log('MOW0');
 						skillProfiles[i][skill.id] = skill.rank;
 					});
 
-					// calculate skills match
+					// console.log('MOW2');
+
+					// // calculate skills match
 					datum.skillMatch = window.calculateMatch(requiredSkills, skillProfiles[i]);
 
-					// save information
+					// console.log('MOW3');
+
+					// // save information
 					data[i] = datum;
-					console.log(datum);
-				};
-				// console.log(data);
+
+					// console.log('MOW4');
+				}
+				console.log('MOW5');
 				window.userList = new List('list-filter', options, data);
 				window.userList.items.splice(0,4);
 				window.userList.remove("name", "template");

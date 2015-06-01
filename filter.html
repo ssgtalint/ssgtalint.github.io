@@ -122,14 +122,14 @@ skillsid: 0
 	</div>
 	<script src="http://listjs.com/no-cdn/list.js"></script>
 	<script>
-		// var options = {
-		//   valueNames: [ 
-		//   	'applicantId',
-		// 	{% for field in table %}
-		// 		'{{field}}',
-		// 	{%endfor%} 
-		//   ]
-		// };
+		var options = {
+		  valueNames: [ 
+		  	'applicantId',
+			{% for field in table %}
+				'{{field}}',
+			{%endfor%} 
+		  ]
+		};
 
-		//userList = new List('list-filter', options);
+		var userList = new List('list-filter', options);
 	</script>
