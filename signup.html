@@ -52,7 +52,7 @@ permalink: /signup/
 
 <script>
 	oauthSignup = function(){
-		UserApp.OAuth.getAuthorizationUrl({ provider_id: 'google', redirect_uri: 'http://https://localhost:4000/login' }, 
+		UserApp.OAuth.getAuthorizationUrl({ provider_id: 'google', redirect_uri: 'http://http://ssgtalint.github.io/login' }, 
 			function(error, result) {
 				if (!error) {
 					window.location.href = result.authorization_url;

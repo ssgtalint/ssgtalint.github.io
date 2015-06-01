@@ -16,14 +16,14 @@ if(token){
                 window.location.href = "/login/";
             }
         } else {
-            valid = $.inArray( user[0].email, users ) >= 0;
+            // valid = $.inArray( user[0].email, users ) >= 0;
 
-            if(!valid){
-               if(window.location != '/logout'){
-                 alert('you are not on the user list, to request access please contact adfasdf@gmail.com');
-               }
-                window.location.href = "/logout";
-            }
+            // if(!valid){
+            //    if(window.location != '/logout'){
+            //      alert('you are not on the user list, to request access please contact adfasdf@gmail.com');
+            //    }
+            //     window.location.href = "/logout";
+            // }
 
             if( !usertypedefined(user[0]) && location.pathname != '/edit/'
             ){

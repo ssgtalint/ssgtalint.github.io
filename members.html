@@ -123,7 +123,7 @@ permalink: /members/
 			}
 		};
 		data = {
-				name: user.first_name + " " + user.last_name,
+				name: user.login,
 				email: user.email,
 				location: user.properties.location.value,
         skills: JSON.parse(user.properties.user_skills.value)
