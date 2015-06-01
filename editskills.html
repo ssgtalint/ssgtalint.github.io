@@ -251,6 +251,7 @@ saveProfile = function(){
 
 		   if(!error){
 		   	alert('saved profile');
+		   	location.reload();
 		   }
 
 		   storeUser(result.user_id, function(error, result){});	

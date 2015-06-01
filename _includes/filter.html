@@ -11,12 +11,7 @@
 {% assign table = site.data.table['employees'].fields %}
 {% assign tabledata = site.categories['employees'] %}
 
-<script style="text/template" id="progressbar">
-	<div class="progress progress-xs m-t-xs m-b-none">
-					 	<div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="<%= progress %>%" style="width:<%= progress %>%; height: 60px; position:relative; top:-30px;" >
-					 	</div>
-					 	</div>
-</script>
+
   	<div id="list-filter">
 	  <div class="row">
 		  <section class="col-md-4 col-lg-3">
@@ -194,7 +189,7 @@
 						name: users[i].first_name,
 						applicantId: i,
 						url: '/members?user=' + users[i].login,
-						location: users[i].properties.location.value,
+						location: users[i].properties.location.value || "Portland, Oregon",
 						availability: users[i].properties.availability.value
 					}
 
@@ -202,7 +197,7 @@
 					var skills = JSON.parse(users[i].properties.user_skills.value);
 					skillProfiles[i] = [];
 					_.each(skills, function(skill){
-						console.log(skill.rank, skill.id);
+						// console.log(skill.rank, skill.id);
 						skillProfiles[i][skill.id] = skill.rank;
 					});
 
@@ -211,7 +206,9 @@
 
 					// save information
 					data[i] = datum;
+					console.log(datum);
 				};
+				// console.log(data);
 				window.userList = new List('list-filter', options, data);
 				window.userList.items.splice(0,4);
 				window.userList.remove("name", "template");
